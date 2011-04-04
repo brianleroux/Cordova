@@ -37,7 +37,7 @@ Usage
 
 Generate a new PhoneGap project by running:
 	
-	phonegap [www recipe] [test recipe]
+	phonegap PROJECTNAME [www recipe] [test recipe]
     
 
 For further usage info try:
@@ -61,7 +61,7 @@ From here try running `make` to see what sort of useful commands you have availa
 
 Other important notes about the generated project:
 
-- The `./lib` folder is your place for custom automations. Protip: make everything relative to the root of your project.
+- The `./lib` folder is your place for custom automations. _Protip: make everything relative to the root of your project._
 - The generated `Makefile` is intended as an example only. 
 - Place unit tests in `./test` and copy in applicable js from `./www`. This is the point of build automation!
 - Put your app code, logic and assets in `./www`.
