@@ -1,0 +1,39 @@
+#! /usr/bin/env python
+
+from optparse import OptionParser
+import sys, os
+
+def main():
+    parser = OptionParser()
+
+    parser.add_option("-w", "--www", action="store", 
+                      dest="www", default="vanilla",
+                      help="recipe for www")
+
+    parser.add_option("-t", "--test", action="store", 
+                      dest="test", default="qunit",
+                      help="recipe for test directory")
+
+    parser.add_option("-l", "--list", action="store_true", 
+                      dest="list",
+                      help="list available recipes")
+
+    options, args = parser.parse_args()
+
+    if options.list:
+        recipes = os.path.join(os.path.dirname(__file__), 'recipes')
+        os.system('ls ' + recipes)
+    else:
+        try:
+            prj = sys.argv[1]
+            tmpl = os.path.join(os.path.dirname(__file__), 'generate-template')
+            dest =  os.path.join(os.getcwd(), prj)
+            os.system("cp -r " + tmpl + " " + dest)
+			# copy in www
+			# copy in test
+        except:
+            print 'error: please supply a project name'
+
+
+if __name__ == "__main__":
+    main()

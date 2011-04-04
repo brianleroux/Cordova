@@ -1,0 +1,34 @@
+#! /usr/bin/env python
+import os, sys
+from xml.dom.minidom import parse
+
+
+def main():
+    config = os.path.join(os.curdir, 'www', 'config.xml')
+    # ensure the config.xml exists
+    if os.path.exists(config):
+        r = parse(config)
+        # parsing out the id (com.phonegap.whatever)
+        if sys.argv[1] == 'id':
+            print r.firstChild.attributes['id'].value
+        # parsing out the name element
+        if sys.argv[1] == 'name':
+            print r.getElementsByTagName('name').pop().firstChild.nodeValue
+        # TODO icon
+        if sys.argv[1] == 'icon':
+            print 'FIXME icons need to be done'
+        if sys.argv[1] == 'feature2intent':
+            intents = parse(os.path.join(os.curdir, 'bin/create/templates/android/intents.xml'))
+            manifest_path = os.path.join(os.curdir, 'tmp/android/AndroidManifest.xml')
+            manifest_xml = parse(manifest_path)
+            app_element = manifest_xml.firstChild
+            for feature in intents.getElementsByTagName('uses-permission'):
+                app_element.appendChild(feature)
+            f = open(manifest_path, 'w')
+            manifest_xml.writexml(f) #toprettyxml?
+            f.close()
+    else:
+        print 'config.xml not found'
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,31 @@
+#! /bin/sh
+
+PKG=$(./bin/create/w3c_config_reader id)
+ACT=$(./bin/create/w3c_config_reader name | sed 's/ //g')
+PTH=$(echo $PKG | sed 's/\./\//g')
+FULL="./tmp/android/src/"$PTH"/"$ACT".java"
+
+# clobber existing build sludge
+rm -rf ./tmp/android
+
+# create the android project
+android create project --target 4 --path ./tmp/android --package $PKG --activity $ACT
+
+# copy contents of www
+mkdir -p ./tmp/android/assets
+cp -r ./www ./tmp/android/assets/www/
+
+# copy in phonegap.js
+cp ./bin/create/templates/android/phonegap.0.9.4.js ./tmp/android/assets/www/phonegap.0.9.4.js
+
+# copy in ./libs/phonegap.jar
+mkdir -p ./tmp/android/libs
+cp ./bin/create/templates/android/phonegap.0.9.4.jar ./tmp/android/libs/phonegap.0.9.4.jar
+
+# copy in default activity
+cat ./bin/create/templates/android/Activity.java > $FULL
+find "$FULL" | xargs grep '__ACTIVITY__' -sl | xargs -L1 sed -i "" "s/__ACTIVITY__/${ACT}/g"
+find "$FULL" | xargs grep '__ID__' -sl | xargs -L1 sed -i "" "s/__ID__/${PKG}/g"
+
+# copy in intents
+./bin/create/w3c_config_reader feature2intent

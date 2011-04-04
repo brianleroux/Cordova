@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns 	= "http://www.w3.org/ns/widgets"
+	xmlns:pg 	= "http://phonegap.com/ns/1.0"
+	id			= "com.phonegap.vanilla"
+	version 	= "0.0.0">
+	<name>PhoneGap Vanilla</name>
+	<description>Vanilla generated app.</description>
+	<author href="http://westcoastlogic.com" email="brian@westcoastlogic.com">@brianleroux</author>
+	<icon src="img/icon.png" gap:role="default" />
+</widget>
