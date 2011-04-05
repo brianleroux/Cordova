@@ -16,6 +16,7 @@ End of May
 - include ./README.md ./generate-template/README.md and help in makefile from docs
 - platform specific static files in ./www (eg app.android.css vs app.ios.css)
 - automatically insturmenting weinre, etc
+- package phonegap/iphone framework
 
 Recipes TODO
 ---

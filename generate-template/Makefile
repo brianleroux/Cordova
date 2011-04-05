@@ -17,6 +17,7 @@ create:
 	./bin/create/android
 	./bin/create/ios
 	./bin/create/webos
+	./bin/create/xcode-debug # we run this to create YOURAPPNAME.xcodeproj/project.pbxproj
 
 debug: 
 	./bin/debug/android

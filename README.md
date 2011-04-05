@@ -18,11 +18,11 @@ Mobile development requires proprietary SDKs. The SDKs supported by this tool cu
 Requirements
 ---
 
-    ios sdk ........ http://developer.apple.com .............. install xcode 3.2.5 and ios dev tools
-    android sdk .... http://developer.android.com ............ install android sdk and avd manager
-    palm sdk ....... http://developer.palm.com ............... install pdk
-	ios-sim ........ https://github.com/Fingertips/ios-sim ... see site for install instructions
-	phonegap/ios ... http://phonegap.com/download ............ install phonegap/iphone
+    ios sdk ........ http://developer.apple.com 
+    android sdk .... http://developer.android.com
+    palm sdk ....... http://developer.palm.com
+	ios-sim ........ https://github.com/Fingertips/ios-sim
+	phonegap/ios ... http://phonegap.com/download <-----------( run phonegap/ios/PhoneGapLibInstaller.pkg 
 
 Installation
 ---
@@ -66,7 +66,7 @@ Other important notes about the generated project:
 - Place unit tests in `./test` and copy in applicable js from `./www`. This is the point of build automation!
 - Put your app code, logic and assets in `./www`.
 - The `./tmp` directory is full of *toxic proprietary build sludge*. Interaction with it should limited as possible.
-- The `./bin` directory is holy. Do not modify or put yourself at risk of not getting updates!
+- Do read `./bin` scripts but only modify at risk of not getting future updates! Instead add your own to `./lib`.
 
 A future release of Cordova will allow easy upgrading by simply overwriting `./bin` and leave an example `Makefile` if none is present. Happily modify `./lib`, `./www` and `./test` to develop your app. 
 
