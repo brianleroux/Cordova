@@ -1,7 +1,7 @@
 Cordova
 ===
 
-A PhoneGap project toolchain that automates common tasks for building cross platform mobile projects with OS X.
+A PhoneGap project toolchain that automates common tasks for building cross platform mobile projects with OS X. This is mobile project automation for common development workflow tasks such as: compiling, debugging, testing, releasing and other things in between.
 
 Currently Supported Platforms
 ---
@@ -74,6 +74,11 @@ Recipes
 ---
 
 Recipes are little packages of web code that initialize from an `index.html` file. By default `phonegap` will create a project with a bare bones (vanilla) `www/index.html` and qunit starter project in the `test/index.html` directory. In the future recipes will be added for all the major mobile dom frameworks like XUI, Sencha Touch and jQuery Mobile. If you'd like to see them sooner, have a look at `ROADMAP.md` and consider contributing!
+
+Known Issues
+---
+
+- Sometimes `./bin/debug/ios` fails to launch. Opening in xCode and building the project once seems to fix. 
 
 Generated MakeFile Commands
 ---

@@ -116,6 +116,6 @@ MainAssistant.prototype.fixSelects = function() {
 MainAssistant.prototype.backSwipeHandler = function() {
   console.log("Back swipe detected.");
   // FIXME: Scroll to top. window.scroll() doesn't seem to work.
-  App.jQT.goBack();
+  // App.jQT.goBack();
 }
 
