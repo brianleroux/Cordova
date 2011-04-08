@@ -1,0 +1,2 @@
+phonegap-plugin init [path] ..................... create a package.json
+phonegap-plugin register [path] ................. register w/ plugins.phonegap.com
