@@ -1,7 +1,6 @@
 Early May
 ---
 
-- validation for config.xml (run check before create)
 - `./test` working for each platform
 - logging for each platform automated
 - app www versioning
@@ -18,6 +17,7 @@ End of May
 - platform specific static files in ./www (eg app.android.css vs app.ios.css)
 - automatically insturmenting weinre, etc
 - package phonegap/iphone framework
+- repackage phonegap-webos
 
 Recipes TODO
 ---

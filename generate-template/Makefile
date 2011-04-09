@@ -2,7 +2,7 @@ all: help
 
 help:
 	@echo try one of these commands:
-	@echo "  create .... writes ou native code to ./tmp directory based on config.xml"
+	@echo "  create .... writes out native code to ./tmp directory based on config.xml"
 	@echo "  debug ..... copies www, compiles native src, installs and launches"
 	@echo "  web ....... serve www at http://localhost:8000"
 	@echo "  weinre .... launch weinre at http://localhost:8080"
@@ -14,15 +14,14 @@ help:
 create:
 	# write out the source for each native platform
 	# careful, this is destructive!!!
+	./bin/util/validate-config-xml
 	./bin/create/android
 	./bin/create/ios
-	./bin/create/webos
 	./bin/create/xcode-debug # we run this to create YOURAPPNAME.xcodeproj/project.pbxproj
 
 debug: 
 	./bin/debug/android
 	./bin/debug/ios
-	./bin/debug/webos
 
 web:
 	cd ./www && python -m SimpleHTTPServer
@@ -33,7 +32,6 @@ weinre:
 test:
 	./bin/test/android
 	./bin/test/ios
-	./bin/test/webos	
 
 log:
 	echo TODO each platform has logging capability...
@@ -44,6 +42,5 @@ release:
 emulate:
 	./bin/emulate/android
 	./bin/emulate/ios
-	./bin/emulate/webos
 
-.PHONY: all
+.PHONY: all help create debug web weinre test log release emulate
