@@ -41,10 +41,15 @@ Cleanup Drudgery
 
 The leavings of fast hacking. Could happen that I (or you) get bored and want to refactor something simple.
 
-- mv ./bin/create/w3c_config_reader ./bin/util/config-reader
-- move logic in w3c_config_reader feature2intent to stand alone script
+- deprecate ./bin/create/w3c_config_reader for ./util/read-config and ./util/validate-config
 - mv ./bin/create/BeautifulSoup.py ./bin/util/BeatifulSoup.py
-- mv ./bin/create/xcode-debug ./bin/util/xcode-debug
+
+
+Contributer Notes
+---
+
+- each script should be a standalone executable
+- make each script single purpose and use unix stdin, stdout, stderr
 - rename scripts with prefixing if they are applicable to a single platform eg. ios-xcode-debug
 
 

@@ -20,16 +20,6 @@ def main():
         # TODO icon
         if sys.argv[1] == 'icon':
             print 'FIXME icons need to be done'
-        if sys.argv[1] == 'feature2intent':
-            intents = parse(os.path.join(os.curdir, 'bin/create/templates/android/intents.xml'))
-            manifest_path = os.path.join(os.curdir, 'tmp/android/AndroidManifest.xml')
-            manifest_xml = parse(manifest_path)
-            app_element = manifest_xml.firstChild
-            for feature in intents.getElementsByTagName('uses-permission'):
-                app_element.appendChild(feature)
-            f = open(manifest_path, 'w')
-            manifest_xml.writexml(f) #toprettyxml?
-            f.close()
     else:
         print 'config.xml not found'
 
