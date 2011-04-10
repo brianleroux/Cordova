@@ -1,0 +1,4 @@
+#! /bin/sh 
+
+: > ./tmp/ios.log
+tail -f ./tmp/ios.log

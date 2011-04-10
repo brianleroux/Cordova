@@ -3,6 +3,8 @@ NAME=$(./bin/create/w3c_config_reader name | sed 's/ //g')
 PRJ="$NAME.xcodeproj"
 APP="build/Debug-iphonesimulator/$NAME.app"
 
+osascript -e "tell application \"iPhone Simulator\" to activate"
+
 cd ./tmp/ios
 xcodebuild -project $PRJ -sdk iphonesimulator4.2
-ios-sim launch $APP &
+ios-sim launch $APP --stderr ./tmp/ios.log 
