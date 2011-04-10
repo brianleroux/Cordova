@@ -11,6 +11,9 @@ def main():
         # parsing out the id (com.phonegap.whatever)
         if sys.argv[1] == 'id':
             print r.firstChild.attributes['id'].value
+        # parsing out the version
+        if sys.argv[1] == 'version':
+            print r.firstChild.attributes['version'].value
         # parsing out the name element
         if sys.argv[1] == 'name':
             print r.getElementsByTagName('name').pop().firstChild.nodeValue

@@ -1,0 +1,23 @@
+#! /usr/bin/env python
+import os, sys
+from xml.dom.minidom import parse
+
+class ConfigReader:
+	def __init__(self):
+		self.config = os.path.join(os.curdir, 'www', 'config.xml')
+		self.parsed = parse(self.config)
+		self.appid = self.parsed.firstChild.attributes['id'].value
+		self.version = self.parsed.firstChild.attributes['version'].value
+		self.name = self.parsed.getElementsByTagName('name').pop().firstChild.nodeValue
+ 
+if __name__ == "__main__":
+	conf = ConfigReader()
+	# parsing out the id (com.phonegap.whatever)
+	if sys.argv[1] == 'id':
+		print conf.appid
+	# parsing out the version
+	if sys.argv[1] == 'version':
+		print conf.version
+	# parsing out the name element
+	if sys.argv[1] == 'name':
+		print conf.name

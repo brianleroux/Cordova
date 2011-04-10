@@ -1,7 +1,6 @@
 0.1.0
 ===
 
-- app www versioning
 - plugins (its a copy/paste problem)
 - icons for each platform from config.xml
 
