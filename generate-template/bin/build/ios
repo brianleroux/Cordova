@@ -1,5 +1,5 @@
 #! /bin/sh
-NAME=$(./bin/create/w3c_config_reader name | sed 's/ //g')
+NAME=$(./bin/util/read-config name | sed 's/ //g')
 PRJ="$NAME.xcodeproj"
 APP="build/Release-iphonesimulator/$NAME.app"
 

@@ -1,7 +1,7 @@
 #! /bin/sh
 
-PKG=$(./bin/create/w3c_config_reader id)
-ACT=$(./bin/create/w3c_config_reader name | sed 's/ //g')
+PKG=$(./bin/util/read-config id)
+ACT=$(./bin/util/read-config name | sed 's/ //g')
 PTH=$(echo $PKG | sed 's/\./\//g')
 FULL="./tmp/android/src/"$PTH"/"$ACT".java"
 
@@ -16,11 +16,11 @@ mkdir -p ./tmp/android/assets
 cp -r ./www ./tmp/android/assets/www/
 
 # copy in phonegap.js
-cp ./bin/create/templates/android/phonegap.0.9.4.js ./tmp/android/assets/www/phonegap.0.9.4.js
+cp ./bin/create/templates/android/phonegap-0.9.4.js ./tmp/android/assets/www/phonegap-0.9.4.js
 
 # copy in ./libs/phonegap.jar
 mkdir -p ./tmp/android/libs
-cp ./bin/create/templates/android/phonegap.0.9.4.jar ./tmp/android/libs/phonegap.0.9.4.jar
+cp ./bin/create/templates/android/phonegap-0.9.4.jar ./tmp/android/libs/phonegap-0.9.4.jar
 
 # copy in default activity
 cat ./bin/create/templates/android/Activity.java > $FULL

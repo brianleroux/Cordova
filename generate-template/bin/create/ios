@@ -39,7 +39,7 @@ PHONEGAP_TEMPLATE_PATH="$PWD/bin/create/templates/ios/"
 # ##############################################
 
 # 1st argument: name of the project
-PROJECT_NAME=$(./bin/create/w3c_config_reader name | sed 's/ //g')
+PROJECT_NAME=$(./bin/util/read-config name | sed 's/ //g')
 
 # 2nd argument: path to put new project
 NEW_PROJECT_PATH=./tmp/ios

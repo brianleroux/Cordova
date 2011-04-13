@@ -1,3 +1,6 @@
 #! /bin/sh
 
+# since we clobber www every time we need to copy in phonegap.js ...
+cp ./bin/create/templates/android/phonegap-0.9.4.js ./tmp/android/assets/www/phonegap-0.9.4.js
+
 cd ./tmp/android && ant debug install

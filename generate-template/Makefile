@@ -32,7 +32,7 @@ test:
 	./bin/test/ios
 
 release:
-	echo TODO this would be a good place for verioning, shortlog for changelog, minificaiton, key signing, etc
+	echo TODO this would be a good place for shortlog for changelog, minificaiton, key signing, etc
 
 emulate:
 	./bin/emulate/android
