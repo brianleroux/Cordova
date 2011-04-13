@@ -7,17 +7,15 @@ help:
 	@echo "  web ....... serve www at http://localhost:8000"
 	@echo "  weinre .... launch weinre at http://localhost:8080"
 	@echo "  test ...... compiles ./test into native"
-	@echo "  log ....... launches logger"
 	@echo "  release ... this is for you to implement!"
 	@echo "  emulate ... launch platform emulators"
 
 create:
 	# write out the source for each native platform
 	# careful, this is destructive!!!
-	./bin/util/validate-config-xml
+	./bin/util/validate-config
 	./bin/create/android
 	./bin/create/ios
-	./bin/create/xcode-debug # we run this to create YOURAPPNAME.xcodeproj/project.pbxproj
 
 debug: 
 	./bin/debug/android
@@ -27,14 +25,11 @@ web:
 	cd ./www && python -m SimpleHTTPServer
 
 weinre:
-	java -jar ./bin/debug/weinre.jar
+	java -jar ./bin/util/weinre.jar
 
 test:
 	./bin/test/android
 	./bin/test/ios
-
-log:
-	echo TODO each platform has logging capability...
 
 release:
 	echo TODO this would be a good place for verioning, shortlog for changelog, minificaiton, key signing, etc
