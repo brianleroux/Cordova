@@ -1,0 +1,13 @@
+#! /bin/sh
+
+
+for plugin in `ls ./lib/plugin`
+do
+    # TODO test for android here...
+
+    # copy web assets
+    cp -r ./lib/plugin/$plugin/www ./tmp/android/assets/www/
+
+    # copy native assets
+    cp -r ./lib/plugin/$plugin/native/android ./tmp/android/src/
+done

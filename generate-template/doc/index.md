@@ -2,13 +2,11 @@ Cordova Automation Scripts
 ===
 
 A toolchain is a set of automations for common, tedious and likely error
-prone tasks in development. Mobile software develoment is rather hostile
-to developers with a distinct lack of open tools. The PhoneGap project
-has helped ease the pain of building apps but building with PhoneGap
-itself can be tedious.  
-
-Despite providing a common abstraction the PhoneGap source itself is 
-exascerbated by a proliferation of proprietary mobile operating sytems and 
+prone tasks for software development. In particular, Mobile software develoment 
+is rather hostile environment for developers with a distinct lack of open tools. 
+The PhoneGap project has helped ease the pain of building apps but building with 
+PhoneGap itself can be tedious. Despite providing a common abstraction the PhoneGap 
+source itself is exascerbated by a proliferation of proprietary mobile operating sytems and 
 sdks. Cordova removes tooling ambigutiy, unifies the nomenclature by providing 
 everything neccessary to itereatively installable web apps. 
 
@@ -99,27 +97,6 @@ TODO
 
 - doc plugins
 - doc release
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

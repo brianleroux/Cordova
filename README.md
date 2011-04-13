@@ -63,7 +63,10 @@ From here try running `make` to see what sort of useful commands you have availa
 Other important notes about the generated project:
 
 - The `./lib` folder is your place for custom automations. _Protip: make everything relative to the root of your project._
-- The generated `Makefile` is intended as an example only. 
+- The generated `Makefile` is intended as an example only. Use it to
+  extend in your own common automations. This is what computers are for, eh.
+- There is further documentation in the `./docs` folder. You should put
+  your project documentation there too. 
 - Place unit tests in `./test` and copy in applicable js from `./www`. This is the point of build automation!
 - Put your app code, logic and assets in `./www`.
 - The `./tmp` directory is full of *toxic proprietary build sludge*. Interaction with it should limited as possible.
