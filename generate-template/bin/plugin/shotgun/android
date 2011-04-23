@@ -1,13 +1,21 @@
-#! /bin/sh
+#! /usr/bin/env python
+"""
+copies ./lib/plugin/PLUGINNAME/native/android code to ./tmp/android/src
+copies ./lib/plugin/PLUGINNAME/www contents to ./tmp/android/assets/www 
 
+"""
 
-for plugin in `ls ./lib/plugin`
-do
-    # TODO test for android here...
+import os, sys
 
-    # copy web assets
-    cp -r ./lib/plugin/$plugin/www ./tmp/android/assets/www/
+plugins = os.listdir('./lib/plugin')
 
-    # copy native assets
-    cp -r ./lib/plugin/$plugin/native/android ./tmp/android/src/
-done
+for plugin in plugins:
+    
+    # copy in native code
+    fromf = './lib/plugin/' + plugin + '/native/android/*'
+    tof = './tmp/android/src/'
+    os.system('cp -r ' + fromf + ' ' + tof)
+        
+    fromf = './lib/plugin/' + plugin + '/www/*'
+    tof = './tmp/android/assets/www/'
+    os.system('cp -r ' + fromf + ' ' + tof)
