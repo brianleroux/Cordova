@@ -3,4 +3,5 @@
 rm -rf ./tmp/android/assets/www
 cp -r ./www ./tmp/android/assets/www/
 
+./bin/plugin/shotgun/android
 ./bin/build/android
