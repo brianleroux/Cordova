@@ -18,7 +18,7 @@ for index, item in enumerate(plugins):
         # FIXME this only supports github w/ git urls
         urllib.urlretrieve(url, archive)
         # ghetto
-        os.system('unzip ' + archive + ' -d ./tmp/plugin/')
+        os.system('unzip ' + archive + ' -d ./tmp/plugin/ > /dev/null 2>&1')
         os.system('rm ' + archive)
         tmp_dir = os.listdir('./tmp/plugin')[0]
         os.system('mv ./tmp/plugin/' + tmp_dir + ' ./lib/plugin/' + name)
