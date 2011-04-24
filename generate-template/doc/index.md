@@ -1,22 +1,17 @@
 Cordova Automation Scripts
 ===
 
-A toolchain is a set of automations for common, tedious and likely error
-prone tasks for software development. In particular, Mobile software dev 
-is rather hostile environment for developers with a distinct lack of open tools. 
-The PhoneGap project has helped ease the pain of building apps but building with 
-PhoneGap itself can be tedious. Despite providing a common abstraction the PhoneGap 
-source itself is exacerbated by a proliferation of proprietary mobile operating systems and 
-sdks. Cordova removes tooling ambiguity, unifies the nomenclature by providing 
-everything necessary to iteratively dev installable web apps. 
+A toolchain is a set of automations for common, tedious and likely error prone tasks for software development. The PhoneGap project has helped ease the pain of building apps but building with PhoneGap itself can be tedious. Despite providing a common abstraction the PhoneGap source itself is exacerbated by a proliferation of proprietary mobile operating systems and sdks.
 
-You will notice a consistent, readable and easily communicable style in
-the script naming/pathing. These conventions make it trivially easy for
-new developers to work with a Cordova based project and, more
-importantly, extend one. Cordova scripts live in the root of your
-project under a folder named `./bin`. Have a look around in that folder
-to get an idea of the tools available to you. A `Makefile` gets
-generated to further simplify common tasks.
+__Cordova is a PhoneGap toolchain for OS X.__
+
+- unified nomenclature for common tasks
+- removes tooling ambiguity 
+- everything you need to iteratively develop installable web apps 
+
+Scripts are presented in consistent, readable and easily communicable style with everything provided by Cordova in the `./bin` directory. Have a browse around in there to get a sense of what you can do. 
+
+These conventions make it trivially easy for new developers to work with a Cordova based project and, more importantly, to _extend with your own automations_. A `Makefile` also gets generated to further simplify common tasks. 
 
 Launch Emulators
 ---
@@ -72,6 +67,13 @@ For example you could imagine creating a custom script like this in `./lib/test/
 	./bin/test/ios
 	./bin/test/android
 
+From here you could update your `Makefile` with a new target something like this:
+
+	test:
+		./lib/test/all
+
+Mobile is hard enough -- you won't regret automated unit tests.
+		
 Logging
 ---
 
@@ -100,11 +102,12 @@ Plugins are copied into `./tmp/*` during a debug build with the following comman
 	./bin/plugin/shotgun/ios ....... copies native/www code into correct places
 	./bin/plugin/shotgun/android ... copies native/www code into correct places
 
+Consider the `shotgun` scripts private for the moment. I'm fairly certain that logic will change.
 
 Other Utilities
 ---
 
-Cordova comes bundled with a suite of other useful utilities.
+Cordova comes bundled with a suite of other useful utilities for mobile dev.
 
 	./bin/util/validate-config ... validates `./www/config.xml`
 	./bin/util/read-config ....... output a value from `./www/config.xml`

@@ -2,6 +2,7 @@
 ---
 
 - improve logging for ios
+- ios plugins need to be identified in our old friend proj.pbxproj
 
 0.3.0
 ---
@@ -13,6 +14,10 @@
 
 - supress the insane amount of stdout noise in the common scripts
 - phonegap-webos
+
+0.5.0
+
+- ./bin/release
 
 Future
 ---
