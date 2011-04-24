@@ -1,9 +1,3 @@
-0.2.0
----
-
-- improve logging for ios
-- ios plugins need to be identified in our old friend proj.pbxproj
-
 0.3.0
 ---
 
