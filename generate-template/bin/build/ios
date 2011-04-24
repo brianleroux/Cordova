@@ -6,4 +6,4 @@ APP="build/Release-iphonesimulator/$NAME.app"
 cd ./tmp/ios
 xcodebuild -project $PRJ -sdk iphonesimulator4.2
 
-ios-sim launch $APP #--stderr ./tmp/ios.log 
+ios-sim launch $APP --stderr ./../ios.log --stdout ./../ios.log &
