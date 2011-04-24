@@ -1,4 +1,5 @@
 #! /bin/sh 
 
-: > ./tmp/ios.log
+rm ./tmp/ios.log
+touch ./tmp/ios.log
 tail -f ./tmp/ios.log

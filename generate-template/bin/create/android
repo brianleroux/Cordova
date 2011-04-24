@@ -28,4 +28,4 @@ find "$FULL" | xargs grep '__ACTIVITY__' -sl | xargs -L1 sed -i "" "s/__ACTIVITY
 find "$FULL" | xargs grep '__ID__' -sl | xargs -L1 sed -i "" "s/__ID__/${PKG}/g"
 
 # copy in intents
-./bin/util/android-convert-config
+./bin/create/android-convert-config
