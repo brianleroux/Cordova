@@ -1,23 +1,25 @@
-0.1.0
-===
-
-- plugins (its a copy/paste problem)
-- icons for each platform from config.xml
-
 0.2.0
 ---
 
-- platform specific static files in ./www (eg app.android.css vs app.ios.css)
-- automatically insturmenting weinre, etc
-- package phonegap/iphone framework
-- phonegap-webos
+- improve logging for ios
 
 0.3.0
 ---
 
 - easy upgrade process (replace ./bin and write out Makefile-Example)
-- include ./README.md ./generate-template/README.md and help in makefile from docs
+- package phonegap/iphone framework
+
+0.4.0
+
 - supress the insane amount of stdout noise in the common scripts
+- phonegap-webos
+
+Future
+---
+
+- platform specific static files in ./www (eg app.android.css vs app.ios.css)
+- include ./README.md ./generate-template/README.md and help in makefile from docs
+- automatically insturmenting weinre, etc
 
 Recipes TODO
 ---

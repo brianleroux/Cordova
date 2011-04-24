@@ -3,21 +3,47 @@ import os, sys
 from xml.dom.minidom import parse
 
 class ConfigReader:
-	def __init__(self):
-		self.config = os.path.join(os.curdir, 'www', 'config.xml')
-		self.parsed = parse(self.config)
-		self.appid = self.parsed.firstChild.attributes['id'].value
-		self.version = self.parsed.firstChild.attributes['version'].value
-		self.name = self.parsed.getElementsByTagName('name').pop().firstChild.nodeValue
- 
+    def __init__(self):
+        self.config = os.path.join(os.curdir, 'www', 'config.xml')
+        self.parsed = parse(self.config)
+        self.appid = self.parsed.firstChild.attributes['id'].value
+        self.version = self.parsed.firstChild.attributes['version'].value
+        self.name = self.parsed.getElementsByTagName('name').pop().firstChild.nodeValue
+        # icons logic
+        self.icons = []
+        tmp_icons = self.parsed.getElementsByTagName('icon')
+        # create a list of tuples (icon_path, icon_width)
+        for index, item in enumerate(tmp_icons):
+            self.icons.append((item.attributes['src'].value, int(item.attributes['width'].value)))
+        # sort largest icon to smallest
+        def comparer(a, b):
+            if a[1] > b[1]:
+                return -1
+            elif a[1] == b[1]:
+                return 0
+            else:
+                return 1
+        # finally set the sorted icons tuple list        
+        self.icons = sorted(self.icons, comparer)
+
 if __name__ == "__main__":
-	conf = ConfigReader()
-	# parsing out the id (com.phonegap.whatever)
-	if sys.argv[1] == 'id':
-		print conf.appid
-	# parsing out the version
-	if sys.argv[1] == 'version':
-		print conf.version
-	# parsing out the name element
-	if sys.argv[1] == 'name':
-		print conf.name
+    conf = ConfigReader()
+    # parsing out the id (com.phonegap.whatever)
+    if sys.argv[1] == 'id':
+        print conf.appid
+    # parsing out the version
+    if sys.argv[1] == 'version':
+        print conf.version
+    # parsing out the name element
+    if sys.argv[1] == 'name':
+        print conf.name
+    # find the small icon
+    if sys.argv[1] == 'small-icon':
+        print os.path.join('.', 'www', conf.icons[-1][0])
+    # find the medium icon
+    if sys.argv[1] == 'medium-icon':
+        print os.path.join('.', 'www', conf.icons[1][0])
+    # find the largest icon
+    if sys.argv[1] == 'large-icon':
+        print os.path.join('.', 'www', conf.icons[0][0])
+

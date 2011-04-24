@@ -8,7 +8,6 @@ Currently Supported Platforms
 
 - iOS
 - Android
-- webOS
 
 Justification
 ---

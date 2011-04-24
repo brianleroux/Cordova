@@ -2,13 +2,13 @@ Cordova Automation Scripts
 ===
 
 A toolchain is a set of automations for common, tedious and likely error
-prone tasks for software development. In particular, Mobile software develoment 
+prone tasks for software development. In particular, Mobile software dev 
 is rather hostile environment for developers with a distinct lack of open tools. 
 The PhoneGap project has helped ease the pain of building apps but building with 
 PhoneGap itself can be tedious. Despite providing a common abstraction the PhoneGap 
-source itself is exascerbated by a proliferation of proprietary mobile operating sytems and 
-sdks. Cordova removes tooling ambigutiy, unifies the nomenclature by providing 
-everything neccessary to itereatively installable web apps. 
+source itself is exacerbated by a proliferation of proprietary mobile operating systems and 
+sdks. Cordova removes tooling ambiguity, unifies the nomenclature by providing 
+everything necessary to iteratively dev installable web apps. 
 
 You will notice a consistent, readable and easily communicable style in
 the script naming/pathing. These conventions make it trivially easy for
@@ -82,6 +82,25 @@ By now you can probably guess how this is going to work.
 
 These tools log to stdout.
 
+Plugins
+---
+
+Rudimentary PhoneGap Plugin support is being prototyped in Cordova. Plugins are installed under `./lib/plugin` and automatically 
+built from a `./bin/debug/*`. Currently available plugin commands are:
+
+	./bin/plugin/find ....... currently only outputs the online plugin registry
+	./bin/plugin/install .... installs specified plugin locally
+	./bin/plugin/list ....... lists locally installed plugins
+	./bin/plugin/register ... registers a plugin with the online plugin registry
+	./bin/plugin/remove ..... removes locally installed plugin
+	./bin/plugin/validate ... validates specified (local) plugin package
+
+Plugins are copied into `./tmp/*` during a debug build with the following commands:
+
+	./bin/plugin/shotgun/ios ....... copies native/www code into correct places
+	./bin/plugin/shotgun/android ... copies native/www code into correct places
+
+
 Other Utilities
 ---
 
@@ -95,8 +114,4 @@ Cordova comes bundled with a suite of other useful utilities.
 TODO
 ---
 
-- doc plugins
 - doc release
-
-
-

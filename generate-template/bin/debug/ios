@@ -3,4 +3,6 @@
 rm -rf ./tmp/ios/www
 cp -r ./www ./tmp/ios/www/
 
+./bin/util/android-copy-icons
+./bin/plugin/shotgun/ios
 ./bin/build/ios

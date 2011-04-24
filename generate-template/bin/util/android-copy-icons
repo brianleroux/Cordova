@@ -1,0 +1,10 @@
+#! /bin/sh
+
+# copies in the largest icon defined in config.xml to android folders
+# FIXME need something better for android icons..
+
+largest=$(./bin/util/read-config large-icon)
+
+cp $largest ./tmp/android/res/drawable-hdpi/icon.png
+cp $largest ./tmp/android/res/drawable-ldpi/icon.png
+cp $largest ./tmp/android/res/drawable-mdpi/icon.png
