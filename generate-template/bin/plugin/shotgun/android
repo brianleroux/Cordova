@@ -10,7 +10,7 @@ import os, sys
 plugins = os.listdir('./lib/plugin')
 
 for plugin in plugins:
-    if plugin != 'README.md':    
+    if os.path.isdir('./lib/plugin/' + plugin):    
         # copy in native code
         fromf = './lib/plugin/' + plugin + '/native/android/*'
         tof = './tmp/android/src/'
