@@ -13,4 +13,4 @@ cp -r ./bin/create/templates/blackberry/javascript/phonegap-0.9.4.js ./tmp/black
 # change project name in config.xml
 sed -i "" "s/__PROJECTNAME__/$PROJECT_NAME/g" ./tmp/blackberry/www/config.xml
 
-echo "INFO: run `ant load-simulator` on Windows to launch Blackberry simulator"
+echo "INFO: run \`ant load-simulator\` on Windows to launch Blackberry simulator"
