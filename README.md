@@ -1,6 +1,10 @@
-Cordova
-===
-
+	                       .___                   
+	  ____  ___________  __| _/_______  _______   
+	_/ ___\/  _ \_  __ \/ __ |/  _ \  \/ /\__  \  
+	\  \__(  <_> )  | \/ /_/ (  <_> )   /  / __ \_
+	 \___  >____/|__|  \____ |\____/ \_/  (____  /
+	     \/         PhoneGap\/Project Toolchain\/
+	
 A PhoneGap project toolchain that automates common tasks for building cross platform mobile projects with OS X. 
 
 Automate common development workflow tasks such as: compiling, debugging, testing, releasing and other things in between. As an added benefit projects generated with Cordova create a consistent, predictable, easy to understand and therefor extend software project. A number of conventions are introduced removing the need for mobile developers to relearn their tools or, worse, rebuild them for every project. 
