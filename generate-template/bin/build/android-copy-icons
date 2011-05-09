@@ -5,6 +5,16 @@
 
 largest=$(./bin/util/read-config large-icon)
 
+if [ ! -d ./tmp/android/res/drawable-hdpi ]; then
+    mkdir ./tmp/android/res/drawable-hdpi
+fi
+if [ ! -d ./tmp/android/res/drawable-ldpi ]; then
+    mkdir ./tmp/android/res/drawable-ldpi
+fi
+if [ ! -d ./tmp/android/res/drawable-mdpi ]; then
+    mkdir ./tmp/android/res/drawable-mdpi
+fi
+
 cp $largest ./tmp/android/res/drawable-hdpi/icon.png
 cp $largest ./tmp/android/res/drawable-ldpi/icon.png
 cp $largest ./tmp/android/res/drawable-mdpi/icon.png

@@ -14,10 +14,12 @@ create:
 	# write out the source for each native platform
 	# careful, this is destructive!!!
 	./bin/util/validate-config
+	./bin/create/blackberry
 	./bin/create/android
 	./bin/create/ios
 
 debug: 
+	./bin/debug/blackberry
 	./bin/debug/android
 	./bin/debug/ios
 
@@ -28,13 +30,15 @@ weinre:
 	java -jar ./bin/util/weinre.jar
 
 test:
+	@echo "WARNING: Blackberry testing not yet implemented"
 	./bin/test/android
 	./bin/test/ios
 
 release:
-	echo TODO this would be a good place for shortlog for changelog, minificaiton, key signing, etc
+	@echo TODO this would be a good place for shortlog for changelog, minificaiton, key signing, etc
 
 emulate:
+	@echo "WARNING: Blackberry must be emulated on Windows"
 	./bin/emulate/android
 	./bin/emulate/ios
 
