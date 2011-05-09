@@ -10,12 +10,12 @@ import os, sys
 plugins = os.listdir('./lib/plugin')
 
 for plugin in plugins:
-    
-    # copy in native code
-    fromf = './lib/plugin/' + plugin + '/native/android/*'
-    tof = './tmp/android/src/'
-    os.system('cp -r ' + fromf + ' ' + tof)
+    if os.path.isdir('./lib/plugin/' + plugin):    
+        # copy in native code
+        fromf = './lib/plugin/' + plugin + '/native/android/*'
+        tof = './tmp/android/src/'
+        os.system('cp -r ' + fromf + ' ' + tof)
         
-    fromf = './lib/plugin/' + plugin + '/www/*'
-    tof = './tmp/android/assets/www/'
-    os.system('cp -r ' + fromf + ' ' + tof)
+        fromf = './lib/plugin/' + plugin + '/www/*'
+        tof = './tmp/android/assets/www/'
+        os.system('cp -r ' + fromf + ' ' + tof)

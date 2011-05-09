@@ -13,17 +13,17 @@ plugins = os.listdir('./lib/plugin')
 os.system('rm -rf ./tmp/ios/Plugins && mkdir ./tmp/ios/Plugins')
 
 for plugin in plugins:
-    
-    # copy in native code
-    natives = os.listdir('./lib/plugin/' + plugin + '/native/ios')
-    for nativefile in natives:
-        fromf = './lib/plugin/' + plugin + '/native/ios/' + nativefile
-        tof = './tmp/ios/Plugins/' + nativefile
-        os.system('cp -r ' + fromf + ' ' + tof)
+    if os.path.isdir('./lib/plugin/' + plugin):    
+        # copy in native code
+        natives = os.listdir('./lib/plugin/' + plugin + '/native/ios')
+        for nativefile in natives:
+            fromf = './lib/plugin/' + plugin + '/native/ios/' + nativefile
+            tof = './tmp/ios/Plugins/' + nativefile
+            os.system('cp -r ' + fromf + ' ' + tof)
         
-    # copy in the web code 
-    asssets = os.listdir('./lib/plugin/' + plugin + '/www')
-    for assset in asssets:
-        fromf = './lib/plugin/' + plugin + '/www/' + assset
-        tof = './tmp/ios/www/' + assset
-        os.system('cp -r ' + fromf + ' ' + tof)
+        # copy in the web code 
+        asssets = os.listdir('./lib/plugin/' + plugin + '/www')
+        for assset in asssets:
+            fromf = './lib/plugin/' + plugin + '/www/' + assset
+            tof = './tmp/ios/www/' + assset
+            os.system('cp -r ' + fromf + ' ' + tof)

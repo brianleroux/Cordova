@@ -10,6 +10,7 @@ Currently Supported Platforms
 
 - iOS
 - Android
+- Blackberry (experimental)
 
 Justification
 ---
@@ -19,11 +20,12 @@ Mobile development requires proprietary SDKs. The SDKs supported by this tool cu
 Requirements
 ---
 
-    ios sdk ........ http://developer.apple.com 
-    android sdk .... http://developer.android.com
-    palm sdk ....... http://developer.palm.com
-	ios-sim ........ https://github.com/Fingertips/ios-sim
-	phonegap/ios ... http://phonegap.com/download <-----------( run phonegap/ios/PhoneGapLibInstaller.pkg 
+    ios sdk .......... http://developer.apple.com 
+    android sdk ...... http://developer.android.com
+    palm sdk ......... http://developer.palm.com
+	ios-sim .......... https://github.com/Fingertips/ios-sim
+	blackberry sdk ... http://us.blackberry.com/developers/browserdev/widgetsdk.jsp (for Windows)
+	phonegap/ios ..... http://phonegap.com/download <-----------( run phonegap/ios/PhoneGapLibInstaller.pkg 
 
 Installation
 ---
@@ -32,6 +34,8 @@ Installation
 2. Add the following line to `~/.bashrc` or `~/.bash_profile`:
 	
 	export PATH=PATH:/path/to/cordova
+3. Install the Blackberry WebWorks SDK on the Windows (virtual) machine on which you intend to run the simulator.
+4. Create a shared folder accessible by the Windows (virtual) machine pointing to /path/to/cordova 
 
 Usage
 ---
@@ -39,7 +43,7 @@ Usage
 Generate a new PhoneGap project by running:
 	
 	phonegap PROJECTNAME --www [www recipe] --test [test recipe]
-    
+    ex., phonegap MyProject --www vanilla
 
 For further usage info try:
 
@@ -72,6 +76,8 @@ Other important notes about the generated project:
 - Put your app code, logic and assets in `./www`.
 - The `./tmp` directory is full of *toxic proprietary build sludge*. Interaction with it should limited as possible.
 - Do read `./bin` scripts but only modify at risk of not getting future updates! Instead add your own to `./lib`.
+- Blackberry only supports create, build, and debug make commands.  Emulating or deploying the build requires either
+  `ant load-simulator` or `ant load-device` respectively to be performed on your Windows (virtual) machine.
 
 A future release of Cordova will allow easy upgrading by simply overwriting `./bin` and leave an example `Makefile` if none is present. Happily modify `./lib`, `./www` and `./test` to develop your app. 
 
