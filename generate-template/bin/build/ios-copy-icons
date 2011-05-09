@@ -9,4 +9,4 @@ largest=$(./bin/util/read-config large-icon)
 
 cp $small ./tmp/ios/icon.png
 cp $medium ./tmp/ios/icon-72.png
-cp $large ./tmp/ios/icon@2x.png
+cp $largest ./tmp/ios/icon@2x.png
