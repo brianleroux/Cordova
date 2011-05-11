@@ -1,3 +1,5 @@
 cache
 DS_Store
 ./generate-template/tmp/**/*
+*.swp
+*.pyc
