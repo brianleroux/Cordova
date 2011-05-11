@@ -14,7 +14,13 @@ class ConfigReader:
         tmp_icons = self.parsed.getElementsByTagName('icon')
         # create a list of tuples (icon_path, icon_width)
         for index, item in enumerate(tmp_icons):
-            self.icons.append((item.attributes['src'].value, int(item.attributes['width'].value)))
+            src = item.attributes.get('src', None)
+            width = int(item.attributes.get('width', 0))
+
+            # shouldn't add icons that fail to provide src attribute
+            if src:
+                self.icons.append((src, int(width)))
+
         # sort largest icon to smallest
         def comparer(a, b):
             if a[1] > b[1]:
