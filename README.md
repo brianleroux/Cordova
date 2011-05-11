@@ -33,7 +33,7 @@ Installation
 1. Make sure you have an Android AVD named `default`.
 2. Add the following line to `~/.bashrc` or `~/.bash_profile`:
 	
-	export PATH=PATH:/path/to/cordova
+	export PATH="$PATH:/path/to/cordova"
 3. Install the Blackberry WebWorks SDK on the Windows (virtual) machine on which you intend to run the simulator.
 4. Create a shared folder accessible by the Windows (virtual) machine pointing to /path/to/cordova 
 
