@@ -3,8 +3,11 @@ import os, sys
 from xml.dom.minidom import parse
 
 class ConfigReader:
-    def __init__(self):
-        self.config = os.path.join(os.curdir, 'www', 'config.xml')
+    def __init__(self, config_path=None):
+        if not config_path:
+            config_path = os.path.join(os.curdir, 'www', 'config.xml')
+
+        self.config = config_path
         self.parsed = parse(self.config)
         self.appid = self.parsed.firstChild.attributes['id'].value
         self.version = self.parsed.firstChild.attributes['version'].value
@@ -15,7 +18,12 @@ class ConfigReader:
         # create a list of tuples (icon_path, icon_width)
         for index, item in enumerate(tmp_icons):
             src = item.attributes.get('src', None)
-            width = int(item.attributes.get('width', 0))
+            if src:
+                src = src.value
+
+            width = item.attributes.get('width', 0)
+            if width:
+                width = int(width.value)
 
             # shouldn't add icons that fail to provide src attribute
             if src:
@@ -33,7 +41,10 @@ class ConfigReader:
         self.icons = sorted(self.icons, comparer)
 
 if __name__ == "__main__":
-    conf = ConfigReader()
+    path = None
+    if len(sys.argv) > 2:
+        path = sys.argv[2]
+    conf = ConfigReader(path)
     # parsing out the id (com.phonegap.whatever)
     if sys.argv[1] == 'id':
         print conf.appid
