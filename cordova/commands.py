@@ -85,3 +85,29 @@ class HelpCommand(Command):
         for command in self.all_commands:
             command.print_overview()
 
+class ReadConfigCommand(Command):
+    key = 'read-config'
+
+    def run(self):
+        print_version()
+
+    @staticmethod
+    def print_overview():
+        print '    read-config - shows configuration for the current project'
+
+    @classmethod
+    def print_detailed_usage(cls):
+        print 'Usage: phonegap read-config configuration'
+        print
+        print '    Displays configuration values for the current project.'
+        print
+        print '    Available configurations:'
+        print '        id - Returns the application id as specified by the name element in the config file.'
+        print '        name - Returns the application name as specified in the config file.'
+        print '        small-icon - Returns the path to the app\'s small icon.'
+        print '        medium-icon - Returns the path to the app\'s medium icon.'
+        print '        large-icon - Returns the path to the app\'s large icon.'
+        print
+        print_version()
+
+

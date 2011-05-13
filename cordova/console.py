@@ -3,7 +3,7 @@
 
 import sys
 
-from cordova.commands import HelpCommand, VersionCommand
+from cordova.commands import HelpCommand, VersionCommand, ReadConfigCommand
 
 class Console(object):
     def __init__(self):
@@ -30,7 +30,8 @@ class Console(object):
 
 COMMANDS = [
     VersionCommand,
-    HelpCommand
+    HelpCommand,
+    ReadConfigCommand
 ]
 
 if __name__ == '__main__':
