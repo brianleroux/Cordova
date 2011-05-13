@@ -3,7 +3,7 @@
 
 from pyvows import Vows, expect
 
-from cordova.commands import Command
+from cordova.commands.base import Command
 
 @Vows.batch
 class CommandVows(Vows.Context):

@@ -80,7 +80,7 @@ class ConsoleApp(Vows.Context):
             expect(topic).to_include('PhoneGap - Cordova v%d.%d.%d' % __version__)
 
         def should_include_usage(self, topic):
-            expect(topic).to_include('Usage: phonegap read-config configuration')
+            expect(topic).to_include('Usage: phonegap read-config [configuration]')
 
         def should_include_explanation(self, topic):
             expect(topic).to_include('Displays configuration values for the current project.')
@@ -102,4 +102,23 @@ class ConsoleApp(Vows.Context):
 
         def should_include_large_icon(self, topic):
             expect(topic).to_include('large-icon - Returns the path to the app\'s large icon.')
+
+    class ReadConfigWithNoOptionsReturnsAll(DefaultContext):
+        def topic(self):
+            return commands.getoutput('cd tests/ && env PYTHONPATH=$PYTHONPATH:.. python %s %s' % (console_app, 'read-config'))
+
+        def should_include_id(self, topic):
+            expect(topic).to_include('id = com.phonegap.vanilla')
+
+        def should_include_name(self, topic):
+            expect(topic).to_include('name = PhoneGap Vanilla')
+
+        def should_include_small_icon(self, topic):
+            expect(topic).to_include('icon for 57px = img/icon-57.png')
+
+        def should_include_medium_icon(self, topic):
+            expect(topic).to_include('icon for 72px = img/icon-72.png')
+
+        def should_include_large_icon(self, topic):
+            expect(topic).to_include('icon for 114px = img/icon-114.png')
 
