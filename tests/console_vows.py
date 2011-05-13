@@ -12,10 +12,13 @@ root_path = abspath(join(dirname(__file__), '../'))
 console_app = join(root_path, 'cordova', 'console.py')
 execute = lambda command: commands.getoutput('python %s %s' % (console_app, command))
 
+class DefaultContext(Vows.NotErrorContext, Vows.NotEmptyContext):
+    pass
+
 @Vows.batch
 class ConsoleApp(Vows.Context):
 
-    class VersionCommand(Vows.NotErrorContext, Vows.NotEmptyContext):
+    class VersionCommand(DefaultContext):
 
         def topic(self):
             return execute('version')
@@ -23,7 +26,7 @@ class ConsoleApp(Vows.Context):
         def should_be_equal_to_version(self, topic):
             expect(topic).to_be_like('PhoneGap - Cordova v%d.%d.%d' % __version__)
 
-    class HelpCommand(Vows.NotErrorContext, Vows.NotEmptyContext):
+    class HelpCommand(DefaultContext):
 
         def topic(self):
             return execute('help')
@@ -43,4 +46,27 @@ class ConsoleApp(Vows.Context):
         def should_include_help_command(self, topic):
             expect(topic).to_include('    help - show this help message and exit')
 
+    class HelpVersion(DefaultContext):
 
+        def topic(self):
+            return execute('help version')
+
+        def should_include_version(self, topic):
+            expect(topic).to_include('PhoneGap - Cordova v%d.%d.%d' % __version__)
+
+        def should_include_usage(self, topic):
+            expect(topic).to_include('Usage: phonegap version')
+
+        def should_include_version_explanation(self, topic):
+            expect(topic).to_include('Retrieves the version for the Cordova library currently installed.')
+
+    class HelpCommandError(DefaultContext):
+
+        def topic(self):
+            return execute('help wtf')
+
+        def should_return_error_message(self, topic):
+            expect(topic).to_include('Error: command wtf not found.')
+
+        def should_include_usage(self, topic):
+            expect(topic).to_include('Usage: phonegap help command')
