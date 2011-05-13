@@ -70,3 +70,5 @@ class ConsoleApp(Vows.Context):
 
         def should_include_usage(self, topic):
             expect(topic).to_include('Usage: phonegap help command')
+
+
