@@ -103,22 +103,59 @@ class ConsoleApp(Vows.Context):
         def should_include_large_icon(self, topic):
             expect(topic).to_include('large-icon - Returns the path to the app\'s large icon.')
 
-    class ReadConfigWithNoOptionsReturnsAll(DefaultContext):
-        def topic(self):
-            return commands.getoutput('cd tests/ && env PYTHONPATH=$PYTHONPATH:.. python %s %s' % (console_app, 'read-config'))
+    class ReadConfig(Vows.Context):
 
-        def should_include_id(self, topic):
-            expect(topic).to_include('id = com.phonegap.vanilla')
+        class WithNoConfigs(DefaultContext):
+            def topic(self):
+                return commands.getoutput('cd tests/ && env PYTHONPATH=$PYTHONPATH:.. python %s %s' % (console_app, 'read-config'))
 
-        def should_include_name(self, topic):
-            expect(topic).to_include('name = PhoneGap Vanilla')
+            def should_include_id(self, topic):
+                expect(topic).to_include('id = com.phonegap.vanilla')
 
-        def should_include_small_icon(self, topic):
-            expect(topic).to_include('icon for 57px = img/icon-57.png')
+            def should_include_name(self, topic):
+                expect(topic).to_include('name = PhoneGap Vanilla')
 
-        def should_include_medium_icon(self, topic):
-            expect(topic).to_include('icon for 72px = img/icon-72.png')
+            def should_include_small_icon(self, topic):
+                expect(topic).to_include('icon for 57px = img/icon-57.png')
 
-        def should_include_large_icon(self, topic):
-            expect(topic).to_include('icon for 114px = img/icon-114.png')
+            def should_include_medium_icon(self, topic):
+                expect(topic).to_include('icon for 72px = img/icon-72.png')
+
+            def should_include_large_icon(self, topic):
+                expect(topic).to_include('icon for 114px = img/icon-114.png')
+
+        class WithId(DefaultContext):
+            def topic(self):
+                return commands.getoutput('cd tests/ && env PYTHONPATH=$PYTHONPATH:.. python %s read-config id' % console_app)
+
+            def should_include_id(self, topic):
+                expect(topic).to_equal('com.phonegap.vanilla')
+
+        class WithName(DefaultContext):
+            def topic(self):
+                return commands.getoutput('cd tests/ && env PYTHONPATH=$PYTHONPATH:.. python %s read-config name' % console_app)
+
+            def should_include_id(self, topic):
+                expect(topic).to_equal('PhoneGap Vanilla')
+
+        class WithSmallIcon(DefaultContext):
+            def topic(self):
+                return commands.getoutput('cd tests/ && env PYTHONPATH=$PYTHONPATH:.. python %s read-config small-icon' % console_app)
+
+            def should_include_id(self, topic):
+                expect(topic).to_equal('img/icon-57.png')
+
+        class WithMediumIcon(DefaultContext):
+            def topic(self):
+                return commands.getoutput('cd tests/ && env PYTHONPATH=$PYTHONPATH:.. python %s read-config medium-icon' % console_app)
+
+            def should_include_id(self, topic):
+                expect(topic).to_equal('img/icon-72.png')
+
+        class WithLargeIcon(DefaultContext):
+            def topic(self):
+                return commands.getoutput('cd tests/ && env PYTHONPATH=$PYTHONPATH:.. python %s read-config large-icon' % console_app)
+
+            def should_include_id(self, topic):
+                expect(topic).to_equal('img/icon-114.png')
 

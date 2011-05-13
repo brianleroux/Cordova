@@ -16,18 +16,39 @@ class ReadConfigCommand(Command):
             config_path = abspath(join(os.curdir, 'www', 'config.xml'))
 
         parsed = parse(config_path)
-        app_id = parsed.firstChild.attributes['id'].value
-        version = parsed.firstChild.attributes['version'].value
-        name = parsed.getElementsByTagName('name').pop().firstChild.nodeValue
-        icons = self.get_icons(parsed)
+        values = {
+            'id': parsed.firstChild.attributes['id'].value,
+            'version': parsed.firstChild.attributes['version'].value,
+            'name': parsed.getElementsByTagName('name').pop().firstChild.nodeValue,
+            'icons': self.get_icons(parsed)
+        }
 
-        if len(self.console.arguments) <= 2:
-            print "id = %s" % app_id
-            print "name = %s" % name
-            print "version = %s" % version
+        if not self.console.arguments:
+            print "id = %s" % values['id']
+            print "name = %s" % values['name']
+            print "version = %s" % values['version']
 
-            for icon in icons:
+            for icon in values['icons']:
                 print "icon for %dpx = %s" % (icon[1], icon[0])
+            return
+
+        config_name = self.console.arguments[0]
+
+        if config_name in ('id', 'name'):
+            print values[config_name]
+            return
+
+        if config_name == 'small-icon':
+            print values['icons'][-1][0]
+            return
+
+        if config_name == 'medium-icon':
+            print values['icons'][1][0]
+            return
+
+        if config_name == 'large-icon':
+            print values['icons'][0][0]
+            return
 
     def get_icons(self, parsed):
         # icons logic
@@ -55,7 +76,7 @@ class ReadConfigCommand(Command):
                 return 0
             else:
                 return 1
-        # finally set the sorted icons tuple list        
+        # finally set the sorted icons tuple list
         icons = sorted(icons, comparer)
 
         return icons
