@@ -169,4 +169,7 @@ if __FILE__ == $PROGRAM_NAME
   name = "./tmp/ios/#{ name }.xcodeproj/project.pbxproj"
   include PabstProj
   add_plugins './tmp/ios/Plugins', name
+  # now remove the ./tmp/ios/ str from the file
+  old = File.read(name).gsub('./tmp/ios/','')
+  open(name, 'w') { |f| f.write old }
 end

@@ -9,17 +9,17 @@ help:
 	@echo "  test ...... compiles ./test into native"
 	@echo "  release ... this is for you to implement!"
 	@echo "  emulate ... launch platform emulators"
-
+	
 create:
 	# write out the source for each native platform
 	# careful, this is destructive!!!
 	./bin/util/validate-config
-	./bin/create/blackberry
+	#./bin/create/blackberry
 	./bin/create/android
 	./bin/create/ios
 
 debug: 
-	./bin/debug/blackberry
+	#./bin/debug/blackberry
 	./bin/debug/android
 	./bin/debug/ios
 
