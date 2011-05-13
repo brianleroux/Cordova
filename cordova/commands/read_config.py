@@ -15,13 +15,7 @@ class ReadConfigCommand(Command):
         if not config_path:
             config_path = abspath(join(os.curdir, 'www', 'config.xml'))
 
-        parsed = parse(config_path)
-        values = {
-            'id': parsed.firstChild.attributes['id'].value,
-            'version': parsed.firstChild.attributes['version'].value,
-            'name': parsed.getElementsByTagName('name').pop().firstChild.nodeValue,
-            'icons': self.get_icons(parsed)
-        }
+        values = self.get_values(config_path)
 
         if not self.console.arguments:
             print "id = %s" % values['id']
@@ -50,7 +44,19 @@ class ReadConfigCommand(Command):
             print values['icons'][0][0]
             return
 
-    def get_icons(self, parsed):
+    @classmethod
+    def get_values(cls, config_path):
+        parsed = parse(config_path)
+
+        return {
+            'id': parsed.firstChild.attributes['id'].value,
+            'version': parsed.firstChild.attributes['version'].value,
+            'name': parsed.getElementsByTagName('name').pop().firstChild.nodeValue,
+            'icons': cls.get_icons(parsed)
+        }
+
+    @classmethod
+    def get_icons(cls, parsed):
         # icons logic
         icons = []
         tmp_icons = parsed.getElementsByTagName('icon')

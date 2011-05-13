@@ -71,6 +71,20 @@ class ConsoleApp(Vows.Context):
         def should_include_usage(self, topic):
             expect(topic).to_include('Usage: phonegap help command')
 
+    class HelpValidateConfig(DefaultContext):
+
+        def topic(self):
+            return execute('help validate-config')
+
+        def should_include_version(self, topic):
+            expect(topic).to_include('PhoneGap - Cordova v%d.%d.%d' % __version__)
+
+        def should_include_usage(self, topic):
+            expect(topic).to_include('Usage: phonegap validate-config')
+
+        def should_include_explanation(self, topic):
+            expect(topic).to_include('Validates the configuration file for the current project.')
+
     class HelpReadConfig(DefaultContext):
 
         def topic(self):
