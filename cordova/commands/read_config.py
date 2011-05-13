@@ -66,7 +66,7 @@ class ReadConfigCommand(Command):
 
             # shouldn't add icons that fail to provide src attribute
             if src:
-                icons.append((src, int(width)))
+                icons.append((join('.', 'www', src), int(width)))
 
         # sort largest icon to smallest
         def comparer(a, b):

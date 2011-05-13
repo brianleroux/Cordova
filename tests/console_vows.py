@@ -116,13 +116,13 @@ class ConsoleApp(Vows.Context):
                 expect(topic).to_include('name = PhoneGap Vanilla')
 
             def should_include_small_icon(self, topic):
-                expect(topic).to_include('icon for 57px = img/icon-57.png')
+                expect(topic).to_include('icon for 57px = ./www/img/icon-57.png')
 
             def should_include_medium_icon(self, topic):
-                expect(topic).to_include('icon for 72px = img/icon-72.png')
+                expect(topic).to_include('icon for 72px = ./www/img/icon-72.png')
 
             def should_include_large_icon(self, topic):
-                expect(topic).to_include('icon for 114px = img/icon-114.png')
+                expect(topic).to_include('icon for 114px = ./www/img/icon-114.png')
 
         class WithId(DefaultContext):
             def topic(self):
@@ -143,19 +143,19 @@ class ConsoleApp(Vows.Context):
                 return commands.getoutput('cd tests/ && env PYTHONPATH=$PYTHONPATH:.. python %s read-config small-icon' % console_app)
 
             def should_include_id(self, topic):
-                expect(topic).to_equal('img/icon-57.png')
+                expect(topic).to_equal('./www/img/icon-57.png')
 
         class WithMediumIcon(DefaultContext):
             def topic(self):
                 return commands.getoutput('cd tests/ && env PYTHONPATH=$PYTHONPATH:.. python %s read-config medium-icon' % console_app)
 
             def should_include_id(self, topic):
-                expect(topic).to_equal('img/icon-72.png')
+                expect(topic).to_equal('./www/img/icon-72.png')
 
         class WithLargeIcon(DefaultContext):
             def topic(self):
                 return commands.getoutput('cd tests/ && env PYTHONPATH=$PYTHONPATH:.. python %s read-config large-icon' % console_app)
 
             def should_include_id(self, topic):
-                expect(topic).to_equal('img/icon-114.png')
+                expect(topic).to_equal('./www/img/icon-114.png')
 
