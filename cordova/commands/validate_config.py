@@ -38,6 +38,10 @@ class ValidateConfigCommand(Command):
             print 'The configuration file at %s is missing a name attribute!' % config_path
             sys.exit(1)
 
+        if 'version' not in values or not values['version']:
+            print 'The configuration file at %s is missing a version attribute!' % config_path
+            sys.exit(1)
+
     @staticmethod
     def print_overview():
         print '    validate-config - Validates the configuration file for the current project.'

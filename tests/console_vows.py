@@ -195,7 +195,7 @@ class ConsoleApp(Vows.Context):
                 def topic(self):
                     return execute('validate-config tests/malformed_config.xml')
 
-                def should_have_status_code_of_1(self, topic):
+                def should_have_failure_status_code(self, topic):
                     expect(topic[0]).to_equal(256)
 
                 def should_have_message_explaining_error(self, topic):
@@ -206,7 +206,7 @@ class ConsoleApp(Vows.Context):
                 def topic(self):
                     return execute('validate-config tests/missing_id_config.xml')
 
-                def should_have_status_code_of_1(self, topic):
+                def should_have_failure_status_code(self, topic):
                     expect(topic[0]).to_equal(256)
 
                 def should_have_message_explaining_error(self, topic):
@@ -217,11 +217,22 @@ class ConsoleApp(Vows.Context):
                 def topic(self):
                     return execute('validate-config tests/missing_name_config.xml')
 
-                def should_have_status_code_of_1(self, topic):
+                def should_have_failure_status_code(self, topic):
                     expect(topic[0]).to_equal(256)
 
                 def should_have_message_explaining_error(self, topic):
                     expect(topic[1]).to_include('The configuration file at')
                     expect(topic[1]).to_include('is missing a name attribute!')
+
+            class AndFailWhenMissingVersion(Vows.Context):
+                def topic(self):
+                    return execute('validate-config tests/missing_version_config.xml')
+
+                def should_have_failure_status_code(self, topic):
+                    expect(topic[0]).to_equal(256)
+
+                def should_have_message_explaining_error(self, topic):
+                    expect(topic[1]).to_include('The configuration file at')
+                    expect(topic[1]).to_include('is missing a version attribute!')
 
 
