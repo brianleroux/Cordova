@@ -10,7 +10,7 @@ from cordova.version import __version__
 
 root_path = abspath(join(dirname(__file__), '../'))
 console_app = join(root_path, 'cordova', 'console.py')
-execute = lambda command: commands.getoutput('python %s %s' % (console_app, command))
+execute = lambda command: commands.getstatusoutput('python %s %s' % (console_app, command))
 
 class DefaultContext(Vows.NotErrorContext, Vows.NotEmptyContext):
     pass
@@ -21,7 +21,7 @@ class ConsoleApp(Vows.Context):
     class VersionCommand(DefaultContext):
 
         def topic(self):
-            return execute('version')
+            return execute('version')[1]
 
         def should_be_equal_to_version(self, topic):
             expect(topic).to_be_like('PhoneGap - Cordova v%d.%d.%d' % __version__)
@@ -29,7 +29,7 @@ class ConsoleApp(Vows.Context):
     class HelpCommand(DefaultContext):
 
         def topic(self):
-            return execute('help')
+            return execute('help')[1]
 
         def should_include_version(self, topic):
             expect(topic).to_include('PhoneGap - Cordova v%d.%d.%d' % __version__)
@@ -49,7 +49,7 @@ class ConsoleApp(Vows.Context):
     class HelpVersion(DefaultContext):
 
         def topic(self):
-            return execute('help version')
+            return execute('help version')[1]
 
         def should_include_version(self, topic):
             expect(topic).to_include('PhoneGap - Cordova v%d.%d.%d' % __version__)
@@ -63,7 +63,7 @@ class ConsoleApp(Vows.Context):
     class HelpCommandError(DefaultContext):
 
         def topic(self):
-            return execute('help wtf')
+            return execute('help wtf')[1]
 
         def should_return_error_message(self, topic):
             expect(topic).to_include('Error: command wtf not found.')
@@ -74,7 +74,7 @@ class ConsoleApp(Vows.Context):
     class HelpValidateConfig(DefaultContext):
 
         def topic(self):
-            return execute('help validate-config')
+            return execute('help validate-config')[1]
 
         def should_include_version(self, topic):
             expect(topic).to_include('PhoneGap - Cordova v%d.%d.%d' % __version__)
@@ -88,7 +88,7 @@ class ConsoleApp(Vows.Context):
     class HelpReadConfig(DefaultContext):
 
         def topic(self):
-            return execute('help read-config')
+            return execute('help read-config')[1]
 
         def should_include_version(self, topic):
             expect(topic).to_include('PhoneGap - Cordova v%d.%d.%d' % __version__)
@@ -172,4 +172,34 @@ class ConsoleApp(Vows.Context):
 
             def should_include_id(self, topic):
                 expect(topic).to_equal('./www/img/icon-114.png')
+
+    class ValidateConfig(Vows.Context):
+
+        class WhenConfigDoesNotExist(Vows.Context):
+            def topic(self):
+                return execute('validate-config')
+
+            def should_be_an_error(self, topic):
+                expect(topic[0]).to_equal(256)
+
+        class WhenItExists(Vows.Context):
+
+            class ItShouldWork(Vows.Context):
+                def topic(self):
+                    return execute('validate-config tests/config.xml')[0]
+
+                def should_not_be_an_error(self, topic):
+                    expect(topic).to_equal(0)
+
+            class AndFailWhenMalformed(Vows.Context):
+                def topic(self):
+                    return execute('validate-config tests/malformed_config.xml')
+
+                def should_have_status_code_of_1(self, topic):
+                    expect(topic[0]).to_equal(256)
+
+                def should_have_message_explaining_error(self, topic):
+                    expect(topic[1]).to_include('The configuration file at')
+                    expect(topic[1]).to_include('is not well formed!')
+
 
