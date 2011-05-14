@@ -235,4 +235,28 @@ class ConsoleApp(Vows.Context):
                     expect(topic[1]).to_include('The configuration file at')
                     expect(topic[1]).to_include('is missing a version attribute!')
 
+    class VersionIndex(Vows.Context):
+
+        class WhenNoConfigFound(Vows.Context):
+            def topic(self):
+                return execute('version-index')
+
+            def should_have_failure_status_code(self, topic):
+                expect(topic[0]).to_equal(256)
+
+            def should_have_message_explaining_error(self, topic):
+                expect(topic[1]).to_include('The configuration file')
+                expect(topic[1]).to_include('was not found!')
+
+        class WhenNoIndexFound(Vows.Context):
+            def topic(self):
+                return execute('version-index tests/config.xml')
+
+            def should_have_failure_status_code(self, topic):
+                expect(topic[0]).to_equal(256)
+
+            def should_have_message_explaining_error(self, topic):
+                expect(topic[1]).to_include('The main PhoneGap file')
+                expect(topic[1]).to_include('was not found!')
+
 
