@@ -262,23 +262,49 @@ class ConsoleApp(Vows.Context):
                 expect(topic[1]).to_include('was not found!')
 
         class WhenBothFound(Vows.Context):
-            def topic(self):
-                root = abspath(dirname(__file__))
-                src = join(root, 'index.html.template')
-                dest = join(root, 'index.html')
-                shutil.copyfile(src, dest)
 
-                result = execute('version-index tests/config.xml tests/index.html')
+            class WhenNoVersionDiv(Vows.Context):
+                def topic(self):
+                    root = abspath(dirname(__file__))
+                    src = join(root, 'index.html.template')
+                    dest = join(root, 'index.html')
+                    shutil.copyfile(src, dest)
 
-                contents = open(dest).read()
+                    result = execute('version-index tests/config.xml tests/index.html')
 
-                os.remove(dest)
+                    contents = open(dest).read()
 
-                return (result[0], contents)
+                    os.remove(dest)
 
-            def should_have_successful_status_code(self, topic):
-                expect(topic[0]).to_equal(0)
+                    return (result[0], contents)
 
-            def should_contain_div_with_version(self, topic):
-                expect(topic[1]).to_include('<div id="version">0.0.0</div>')
+                def should_have_successful_status_code(self, topic):
+                    expect(topic[0]).to_equal(0)
+
+                def should_contain_div_with_version(self, topic):
+                    expect(topic[1]).to_include('<div id="version">0.0.0</div>')
+
+            class WhenVersionDiv(Vows.Context):
+                def topic(self):
+                    root = abspath(dirname(__file__))
+                    src = join(root, 'index.html.with.version.template')
+                    dest = join(root, 'index.html')
+                    shutil.copyfile(src, dest)
+
+                    result = execute('version-index tests/config.xml tests/index.html')
+
+                    contents = open(dest).read()
+
+                    os.remove(dest)
+
+                    return (result[0], contents)
+
+                def should_have_successful_status_code(self, topic):
+                    expect(topic[0]).to_equal(0)
+
+                def should_contain_div_with_version(self, topic):
+                    expect(topic[1]).to_include('<div id="version">0.0.0</div>')
+
+                def should_not_contain_previous_div_with_version(self, topic):
+                    expect(topic[1]).not_to_include('<div id="version">10.10.10</div>')
 
