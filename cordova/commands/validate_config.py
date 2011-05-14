@@ -30,6 +30,10 @@ class ValidateConfigCommand(Command):
             print 'The configuration file at %s is not well formed!' % config_path
             sys.exit(1)
 
+        if 'id' not in values or not values['id']:
+            print 'The configuration file at %s is missing an id attribute!' % config_path
+            sys.exit(1)
+
     @staticmethod
     def print_overview():
         print '    validate-config - Validates the configuration file for the current project.'
