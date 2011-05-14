@@ -7,6 +7,7 @@ from cordova.commands.base import Command
 
 class HelpCommand(Command):
     key = 'help'
+    type = 'system'
 
     def __init__(self, console, all_commands):
         super(HelpCommand, self).__init__(console)
@@ -53,7 +54,16 @@ class HelpCommand(Command):
 
     def print_commands(self):
         print 'Available commands:'
-        for command in self.all_commands:
+        for command in filter(lambda c: c.type == 'main', self.all_commands):
             command.print_overview()
 
+        print
+        print 'Utilities:'
+        for command in filter(lambda c: c.type == 'util', self.all_commands):
+            command.print_overview()
+
+        print
+        print 'Other commands:'
+        for command in filter(lambda c: c.type == 'system', self.all_commands):
+            command.print_overview()
 

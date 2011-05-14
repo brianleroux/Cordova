@@ -12,6 +12,7 @@ from cordova.commands.read_config import ReadConfigCommand
 
 class ValidateConfigCommand(Command):
     key = 'validate-config'
+    type = 'util'
 
     def run(self, config_path=None):
         if self.console.arguments:

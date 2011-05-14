@@ -11,6 +11,7 @@ from cordova.commands.read_config import ReadConfigCommand
 
 class VersionIndexCommand(Command):
     key = 'version-index'
+    type = 'util'
 
     def run(self, config_path=None, index_path=None):
         if self.console.arguments and self.console.arguments[-1].endswith('index.html'):

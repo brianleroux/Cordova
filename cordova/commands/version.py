@@ -5,6 +5,7 @@ from cordova.commands.base import Command
 
 class VersionCommand(Command):
     key = 'version'
+    type = 'system'
 
     def run(self):
         self.print_version()

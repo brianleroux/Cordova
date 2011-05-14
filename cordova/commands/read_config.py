@@ -11,6 +11,7 @@ from cordova.commands.base import Command
 
 class ReadConfigCommand(Command):
     key = 'read-config'
+    type = 'util'
 
     def run(self, config_path=None):
         if not config_path:
