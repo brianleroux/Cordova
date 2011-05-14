@@ -1,8 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+import os
 from os.path import join, abspath, dirname
 import commands
+import shutil
 
 from pyvows import Vows, expect
 
@@ -259,4 +261,24 @@ class ConsoleApp(Vows.Context):
                 expect(topic[1]).to_include('The main PhoneGap file')
                 expect(topic[1]).to_include('was not found!')
 
+        class WhenBothFound(Vows.Context):
+            def topic(self):
+                root = abspath(dirname(__file__))
+                src = join(root, 'index.html.template')
+                dest = join(root, 'index.html')
+                shutil.copyfile(src, dest)
+
+                result = execute('version-index tests/config.xml tests/index.html')
+
+                contents = open(dest).read()
+
+                os.remove(dest)
+
+                return (result[0], contents)
+
+            def should_have_successful_status_code(self, topic):
+                expect(topic[0]).to_equal(0)
+
+            def should_contain_div_with_version(self, topic):
+                expect(topic[1]).to_include('<div id="version">0.0.0</div>')
 
