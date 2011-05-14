@@ -78,7 +78,7 @@ class FindPluginCommand(Command):
             plugin_name = self.console.arguments[-1]
 
         if not plugin_name:
-            print 'Listing all PhoneGap Plugins...'
+            print 'Available PhoneGap Plugins'
             print
 
             for plugin in plugin_list:
@@ -94,7 +94,7 @@ class FindPluginCommand(Command):
             matching_plugins = [plugin for plugin in plugin_list if re.search(plugin_name.lower(), plugin.name.lower())]
 
             if not matching_plugins:
-                print "No plugin found with a name that matches %s" % plugin_name
+                print "No plugin found with a name that matches %s." % plugin_name
                 sys.exit(1)
 
             for plugin in matching_plugins:
