@@ -5,10 +5,19 @@ import os
 from os.path import join, abspath, dirname
 import commands
 import shutil
+import urllib
 
 from pyvows import Vows, expect
 
 from cordova.version import __version__
+
+HTTP_AVAILABLE = True
+try:
+    response = urllib.urlopen('http://www.google.com')
+    if response.getcode() != 200:
+        HTTP_AVAILABLE = False
+except:
+    HTTP_AVAILABLE = False
 
 root_path = abspath(join(dirname(__file__), '../'))
 console_app = join(root_path, 'cordova', 'console.py')
@@ -308,46 +317,52 @@ class ConsoleApp(Vows.Context):
                 def should_not_contain_previous_div_with_version(self, topic):
                     expect(topic[1]).not_to_include('<div id="version">10.10.10</div>')
 
-    class FindPlugin(Vows.Context):
+    if not HTTP_AVAILABLE:
+        print "-----------------------------------------------------------------------"
+        print "WARNING: HTTP Dependent tests skipped due to lack of network connection"
+        print "-----------------------------------------------------------------------"
+    else:
+        class FindPlugin(Vows.Context):
 
-        class WhenNoPluginSpecified(Vows.Context):
-            def topic(self):
-                return execute('find-plugin')
+            class WhenNoPluginSpecified(Vows.Context):
+                def topic(self):
+                    return execute('find-plugin')
 
-            def should_not_be_an_error(self, topic):
-                expect(topic[0]).to_equal(0)
+                def should_not_be_an_error(self, topic):
+                    expect(topic[0]).to_equal(0)
 
-            def should_have_available_plugins_message(self, topic):
-                expect(topic[1]).to_include('Available PhoneGap Plugins')
+                def should_have_available_plugins_message(self, topic):
+                    expect(topic[1]).to_include('Available PhoneGap Plugins')
 
-            def should_show_hello_world_plugin(self, topic):
-                expect(topic[1]).to_include('com.phonegap.plugin.HelloWorld v0.1.0 - A PhoneGap Plugin hello world.')
+                def should_show_hello_world_plugin(self, topic):
+                    expect(topic[1]).to_include('com.phonegap.plugin.HelloWorld v0.1.0 - A PhoneGap Plugin hello world.')
 
-            def should_include_message_about_details(self, topic):
-                expect(topic[1]).to_include("Type 'phonegap find-plugin <plugin name or part of plugin name>' to find more about it.")
+                def should_include_message_about_details(self, topic):
+                    expect(topic[1]).to_include("Type 'phonegap find-plugin <plugin name or part of plugin name>' to find more about it.")
 
-        class WhenInvalidPluginSpecified(Vows.Context):
-            def topic(self):
-                return execute('find-plugin invalid-weird-plugin-name')
+            class WhenInvalidPluginSpecified(Vows.Context):
+                def topic(self):
+                    return execute('find-plugin invalid-weird-plugin-name')
 
-            def should_be_an_error(self, topic):
-                expect(topic[0]).not_to_equal(0)
+                def should_be_an_error(self, topic):
+                    expect(topic[0]).not_to_equal(0)
 
-            def should_say_it_was_not_found(self, topic):
-                expect(topic[1]).to_include('No plugin found with a name that matches invalid-weird-plugin-name.')
+                def should_say_it_was_not_found(self, topic):
+                    expect(topic[1]).to_include('No plugin found with a name that matches invalid-weird-plugin-name.')
 
-        class WhenHelloWorldPluginSpecified(Vows.Context):
-            def topic(self):
-                return execute('find-plugin helloworld')
+            class WhenHelloWorldPluginSpecified(Vows.Context):
+                def topic(self):
+                    return execute('find-plugin helloworld')
 
-            def should_not_be_an_error(self, topic):
-                expect(topic[0]).to_equal(0)
+                def should_not_be_an_error(self, topic):
+                    expect(topic[0]).to_equal(0)
 
-            def should_include_id_and_version(self, topic):
-                expect(topic[1]).to_include('com.phonegap.plugin.HelloWorld v0.1.0')
+                def should_include_id_and_version(self, topic):
+                    expect(topic[1]).to_include('com.phonegap.plugin.HelloWorld v0.1.0')
 
-            def should_include_description(self, topic):
-                expect(topic[1]).to_include('A PhoneGap Plugin hello world.')
+                def should_include_description(self, topic):
+                    expect(topic[1]).to_include('A PhoneGap Plugin hello world.')
 
-            def should_include_repo_info(self, topic):
-                expect(topic[1]).to_include('Repository (git): git://github.com/brianleroux/phonegap-plugin-hello.git')
+                def should_include_repo_info(self, topic):
+                    expect(topic[1]).to_include('Repository (git): git://github.com/brianleroux/phonegap-plugin-hello.git')
+
