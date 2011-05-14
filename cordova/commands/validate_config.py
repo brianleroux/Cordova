@@ -34,6 +34,10 @@ class ValidateConfigCommand(Command):
             print 'The configuration file at %s is missing an id attribute!' % config_path
             sys.exit(1)
 
+        if 'name' not in values or not values['name']:
+            print 'The configuration file at %s is missing a name attribute!' % config_path
+            sys.exit(1)
+
     @staticmethod
     def print_overview():
         print '    validate-config - Validates the configuration file for the current project.'

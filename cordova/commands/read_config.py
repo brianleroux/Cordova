@@ -48,10 +48,18 @@ class ReadConfigCommand(Command):
     def get_values(cls, config_path):
         parsed = parse(config_path)
 
+        id_value = parsed.firstChild.getAttribute('id')
+        version = parsed.firstChild.getAttribute('version')
+
+        name_elements = parsed.getElementsByTagName('name')
+        name = ''
+        if name_elements:
+            name = name_elements.pop().firstChild.nodeValue
+
         return {
-            'id': parsed.firstChild.attributes['id'].value,
-            'version': parsed.firstChild.attributes['version'].value,
-            'name': parsed.getElementsByTagName('name').pop().firstChild.nodeValue,
+            'id': id_value,
+            'version': version,
+            'name': name,
             'icons': cls.get_icons(parsed)
         }
 
