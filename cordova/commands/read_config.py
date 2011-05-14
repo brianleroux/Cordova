@@ -1,10 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+import sys
 import os
 from xml.dom.minidom import parse
 
-from os.path import abspath, join
+from os.path import abspath, join, exists
 
 from cordova.commands.base import Command
 
@@ -14,6 +15,10 @@ class ReadConfigCommand(Command):
     def run(self, config_path=None):
         if not config_path:
             config_path = abspath(join(os.curdir, 'www', 'config.xml'))
+
+        if not exists(config_path):
+            print 'No configuration file found at %s!' % config_path
+            sys.exit(1)
 
         values = self.get_values(config_path)
 
