@@ -19,18 +19,18 @@ class CreateCommand(Command):
 
         parser = OptionParser()
 
-        parser.add_option("-w", "--www", action="store", 
-                          dest="www", default="vanilla",
-                          help="recipe for www")
+        parser.add_option('-w', '--www', action='store', 
+                          dest='www', default='vanilla',
+                          help='recipe for www')
 
-        parser.add_option("-t", "--test", action="store", 
-                          dest="test", default="qunit",
-                          help="recipe for test directory")
+        parser.add_option('-t', '--test', action='store', 
+                          dest='test', default='qunit',
+                          help='recipe for test directory')
 
         options, args = parser.parse_args(self.console.arguments)
 
         if not args:
-            print "ERROR: The project name is required!"
+            print 'ERROR: The project name is required!'
             print
             print 'Type "phonegap help create" for more information.'
             print
@@ -57,6 +57,13 @@ class CreateCommand(Command):
         # copy in recipes for www and test 
         shutil.copytree(www, dest_www)
         shutil.copytree(test, dest_test)
+
+        print 'Project %s was created successfully!' % prj
+        print
+        print 'Don\'t forget to edit the config.xml file under www.'
+        print 'Use ./bin/emulate to fire all emulators and ./bin/debug to install and debug your app.'
+        print 'Explore the ./bin/ for more options.'
+        print 'Happy hacking!'
 
     @staticmethod
     def print_overview():

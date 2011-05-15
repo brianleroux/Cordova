@@ -343,6 +343,16 @@ class ConsoleApp(Vows.Context):
             def should_say_project_was_created_successfully(self, topic):
                 expect(topic[1]).to_include('Project createCommandSample was created successfully!')
 
+            def should_remind_you_to_edit_config_xml(self, topic):
+                expect(topic[1]).to_include('Don\'t forget to edit the config.xml file under www.')
+
+            def should_remind_you_of_the_commands(self, topic):
+                expect(topic[1]).to_include('Use ./bin/emulate to fire all emulators and ./bin/debug to install and debug your app.')
+                expect(topic[1]).to_include('Explore the ./bin/ for more options.')
+
+            def should_wish_a_happy_hacking(self, topic):
+                expect(topic[1]).to_include('Happy hacking!')
+
             class FileSystem(Vows.Context):
                 def topic(self):
                     return exists('/tmp/createCommandSample')
