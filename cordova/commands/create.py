@@ -28,9 +28,10 @@ class CreateCommand(Command):
 
         try:
             prj = args[0]
-            www = os.path.join(os.path.dirname(__file__), 'recipes', options.www)
-            test = os.path.join(os.path.dirname(__file__), 'recipes', options.test)
-            tmpl = os.path.join(os.path.dirname(__file__), 'generate-template')
+            www = join(recipes_path, options.www)
+            test = join(recipes_path, options.test)
+
+            tmpl = join(, 'generate-template')
             dest =  os.path.join(os.getcwd(), prj)
             dest_www = os.path.join(dest, 'www')
             dest_test = os.path.join(dest, 'test')
