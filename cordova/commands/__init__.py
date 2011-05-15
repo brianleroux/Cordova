@@ -8,8 +8,10 @@ from cordova.commands.validate_config import ValidateConfigCommand
 from cordova.commands.version_index import VersionIndexCommand
 from cordova.commands.find_plugin import FindPluginCommand
 from cordova.commands.create import CreateCommand
+from cordova.commands.list_recipes import ListRecipesCommand
 
 COMMANDS = [
+    ListRecipesCommand,
     CreateCommand,
     FindPluginCommand,
     ReadConfigCommand,
