@@ -1,8 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+import sys
+import os
 from os.path import join, abspath, dirname
 from optparse import OptionParser
+import shutil
 
 from cordova.commands.base import Command
 
@@ -26,25 +29,34 @@ class CreateCommand(Command):
 
         options, args = parser.parse_args(self.console.arguments)
 
-        try:
-            prj = args[0]
-            www = join(recipes_path, options.www)
-            test = join(recipes_path, options.test)
+        if not args:
+            print "ERROR: The project name is required!"
+            print
+            print 'Type "phonegap help create" for more information.'
+            print
+            self.print_version()
+            sys.exit(1)
 
-            tmpl = join(, 'generate-template')
-            dest =  os.path.join(os.getcwd(), prj)
-            dest_www = os.path.join(dest, 'www')
-            dest_test = os.path.join(dest, 'test')
-            # copy in the new project yay!
-            os.system("cp -r " + tmpl + " " + dest)
-            # clobber crummy local www
-            os.system('rm -rf ' + dest_www)
-            os.system('rm -rf ' + dest_test)
-            # copy in recipes for www and test 
-            os.system("cp -r " + www + " " + dest_www)
-            os.system("cp -r " + test + " " + dest_test)
-        except:
-            print 'error: please supply a project name'
+        prj = args[0]
+
+        www = join(recipes_path, options.www)
+        test = join(recipes_path, options.test)
+
+        tmpl = join(root_path, 'generate-template')
+        dest =  abspath(join(os.curdir, prj))
+        dest_www = join(dest, 'www')
+        dest_test = join(dest, 'test')
+
+        # copy in the new project yay!
+        shutil.copytree(tmpl, dest)
+
+        # clobber crummy local www
+        shutil.rmtree(dest_www)
+        shutil.rmtree(dest_test)
+
+        # copy in recipes for www and test 
+        shutil.copytree(www, dest_www)
+        shutil.copytree(test, dest_test)
 
     @staticmethod
     def print_overview():

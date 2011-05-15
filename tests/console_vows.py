@@ -318,23 +318,37 @@ class ConsoleApp(Vows.Context):
                     expect(topic[1]).not_to_include('<div id="version">10.10.10</div>')
 
     class CreateCommand(Vows.Context):
-        def topic(self):
-            if exists('/tmp/createCommandSample'):
-                shutil.rmtree('/tmp/createCommandSample')
-            return execute('create createCommandSample', '/tmp')
-
-        def should_not_be_an_error(self, topic):
-            expect(topic[0]).to_equal(0)
-
-        def should_say_project_was_created_successfully(self, topic):
-            expect(topic[1]).to_include('Project createCommandSample was created successfully!')
-
-        class FileSystem(Vows.Context):
+        class WhenMissingProjectName(Vows.Context):
             def topic(self):
-                return exists('/tmp/createCommandSample')
+                return execute('create')
 
-            def should_exist(self, topic):
-                expect(topic).to_be_true()
+            def should_be_an_error(self, topic):
+                expect(topic[0]).not_to_equal(0)
+
+            def should_say_project_name_is_required(self, topic):
+                expect(topic[1]).to_include('ERROR: The project name is required!')
+
+            def should_point_to_help(self, topic):
+                expect(topic[1]).to_include('Type "phonegap help create" for more information.')
+
+        class WhenProperArguments(Vows.Context):
+            def topic(self):
+                if exists('/tmp/createCommandSample'):
+                    shutil.rmtree('/tmp/createCommandSample')
+                return execute('create createCommandSample', '/tmp')
+
+            def should_not_be_an_error(self, topic):
+                expect(topic[0]).to_equal(0)
+
+            def should_say_project_was_created_successfully(self, topic):
+                expect(topic[1]).to_include('Project createCommandSample was created successfully!')
+
+            class FileSystem(Vows.Context):
+                def topic(self):
+                    return exists('/tmp/createCommandSample')
+
+                def should_exist(self, topic):
+                    expect(topic).to_be_true()
 
     if not HTTP_AVAILABLE:
         print "-----------------------------------------------------------------------"
