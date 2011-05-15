@@ -12,6 +12,8 @@ class CreateCommand(Command):
 
     def run(self):
         root_path = abspath(join(dirname(__file__), '..', '..'))
+        recipes_path = join(root_path, 'recipes')
+
         parser = OptionParser()
 
         parser.add_option("-w", "--www", action="store", 
