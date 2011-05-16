@@ -12,12 +12,12 @@ from pyvows import Vows, expect
 from cordova.version import __version__
 
 HTTP_AVAILABLE = True
-try:
-    response = urllib.urlopen('http://www.google.com')
-    if response.getcode() != 200:
-        HTTP_AVAILABLE = False
-except:
-    HTTP_AVAILABLE = False
+#try:
+    #response = urllib.urlopen('http://www.google.com')
+    #if response.getcode() != 200:
+        #HTTP_AVAILABLE = False
+#except:
+    #HTTP_AVAILABLE = False
 
 root_path = abspath(join(dirname(__file__), '../'))
 console_app = join(root_path, 'cordova', 'console.py')
@@ -316,6 +316,21 @@ class ConsoleApp(Vows.Context):
 
                 def should_not_contain_previous_div_with_version(self, topic):
                     expect(topic[1]).not_to_include('<div id="version">10.10.10</div>')
+
+    class ListRecipesCommand(Vows.Context):
+        def topic(self):
+            return execute('list-recipes')
+
+        def should_not_be_an_error(self, topic):
+            expect(topic[0]).to_equal(0)
+
+        def should_list_available_recipes(self, topic):
+            expect(topic[1]).to_include('Available recipes:')
+
+        def should_list_default_recipes(self, topic):
+            expect(topic[1]).to_include('big3')
+            expect(topic[1]).to_include('vanilla')
+            expect(topic[1]).to_include('qunit')
 
     class CreateCommand(Vows.Context):
         class WhenMissingProjectName(Vows.Context):
