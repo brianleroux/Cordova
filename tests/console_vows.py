@@ -380,6 +380,18 @@ class ConsoleApp(Vows.Context):
         print "WARNING: HTTP Dependent tests skipped due to lack of network connection"
         print "-----------------------------------------------------------------------"
     else:
+        class InstallPlugin(Vows.Context):
+            class WhenNoPluginNameSpecified(Vows.Context):
+                def topic(self):
+                    return execute('install-plugin')
+
+                def should_be_an_error(self, topic):
+                    expect(topic[0]).not_to_equal(0)
+
+                def should_say_plugin_name_is_mandatory(self, topic):
+                    expect(topic[1]).to_include('The plugin name is mandatory!')
+
+
         class FindPlugin(Vows.Context):
 
             class WhenNoPluginSpecified(Vows.Context):

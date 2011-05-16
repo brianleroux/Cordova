@@ -50,7 +50,7 @@ class HelpCommand(Command):
 
     @staticmethod
     def print_overview():
-        print '    help - show this help message and exit'
+        print '    help - show this help message and exit.'
 
     def print_commands(self):
         print 'Available commands:'

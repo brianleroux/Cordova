@@ -103,7 +103,7 @@ class ReadConfigCommand(Command):
 
     @staticmethod
     def print_overview():
-        print '    read-config - shows configuration for the current project'
+        print '    read-config - shows configuration for the current project.'
 
     @classmethod
     def print_detailed_usage(cls):

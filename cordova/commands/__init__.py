@@ -7,6 +7,7 @@ from cordova.commands.read_config import ReadConfigCommand
 from cordova.commands.validate_config import ValidateConfigCommand
 from cordova.commands.version_index import VersionIndexCommand
 from cordova.commands.find_plugin import FindPluginCommand
+from cordova.commands.install_plugin import InstallPluginCommand
 from cordova.commands.create import CreateCommand
 from cordova.commands.list_recipes import ListRecipesCommand
 
@@ -14,6 +15,7 @@ COMMANDS = [
     ListRecipesCommand,
     CreateCommand,
     FindPluginCommand,
+    InstallPluginCommand,
     ReadConfigCommand,
     ValidateConfigCommand,
     VersionIndexCommand,

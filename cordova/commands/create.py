@@ -67,7 +67,7 @@ class CreateCommand(Command):
 
     @staticmethod
     def print_overview():
-        print '    create - starts a new PhoneGap project'
+        print '    create - starts a new PhoneGap project.'
 
     @classmethod
     def print_detailed_usage(cls):

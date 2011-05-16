@@ -8,6 +8,13 @@ import urllib
 
 from cordova.commands.base import Command
 
+class PluginList(list):
+    def find_by_key(self, key):
+        for item in self:
+            if item.key == key:
+                return item
+        return None
+
 class Repository(object):
     def __init__(self, type, url):
         self.type = type
@@ -57,21 +64,29 @@ class Plugin(object):
 class FindPluginCommand(Command):
     key = 'find-plugin'
     type = 'main'
+    url = 'http://phonegap-plugins.appspot.com/_je/plugin'
 
-    def run(self, config_path=None):
+    @classmethod
+    def get_all_plugins(cls):
         try:
-            url = 'http://phonegap-plugins.appspot.com/_je/plugin'
-            plugins_json = urllib.urlopen(url).read()
+            plugins_json = urllib.urlopen(cls.url).read()
             plugins = json.loads(plugins_json)
-        except (ValueError, ):
-            print "Connection to %s failed. Could not retrieve plugin list." % url
-            sys.exit(1)
 
-        plugin_list = []
-        for index, item in enumerate(plugins):
-            if not 'name' in item:
-                continue
-            plugin_list.append(Plugin.from_json(item))
+            plugin_list = PluginList()
+            for index, item in enumerate(plugins):
+                if not 'name' in item:
+                    continue
+                plugin_list.append(Plugin.from_json(item))
+
+            return plugin_list
+        except (ValueError, ):
+            return None
+
+    def run(self):
+        plugin_list = self.get_all_plugins()
+        if plugin_list is None:
+            print "Connection to %s failed. Could not retrieve plugin list." % self.url
+            sys.exit(1)
 
         plugin_name = None
         if self.console.arguments:
@@ -105,7 +120,7 @@ class FindPluginCommand(Command):
 
     @staticmethod
     def print_overview():
-        print '    find-plugin - shows informaton on a given plugin or lists all available plugins'
+        print '    find-plugin - shows informaton on a given plugin or lists all available plugins.'
 
     @classmethod
     def print_detailed_usage(cls):

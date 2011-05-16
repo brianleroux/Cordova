@@ -33,7 +33,7 @@ class ListRecipesCommand(Command):
 
     @staticmethod
     def print_overview():
-        print '    list-recipes - lists the available recipes for starting a new project'
+        print '    list-recipes - lists the available recipes for starting a new project.'
 
     @classmethod
     def print_detailed_usage(cls):
