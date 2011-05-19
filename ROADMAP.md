@@ -1,8 +1,3 @@
-0.2.1
----
-
-- pbx haunting continues; compiles successfully but fails for plugins
-
 0.3.0
 ---
 

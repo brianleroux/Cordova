@@ -1,4 +1,5 @@
 #! /usr/bin/env ruby
+require 'ftools'
 #
 # thank you @alunny for suffering this before I had to - @brianleroux
 #
@@ -167,7 +168,15 @@ if __FILE__ == $PROGRAM_NAME
   name = `./bin/util/read-config name`.strip()
   name = name.gsub(' ', '')
   name = "./tmp/ios/#{ name }.xcodeproj/project.pbxproj"
+  back = "#{name}.bak"
+  
   include PabstProj
+  # create a backup of the pbxproj, once
+  FileUtils.cp(name, back) unless File.exists? back 
+  # clobber the old pbxproj:
+  FileUtils.rm name
+  FileUtils.cp back name
+  # add in the plugins
   add_plugins './tmp/ios/Plugins', name
   # now remove the ./tmp/ios/ str from the file
   old = File.read(name).gsub('./tmp/ios/','')
