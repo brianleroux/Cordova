@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PhoneGap Device API Documentation</title>
+    <link rel="stylesheet" href="css/app.css" type="text/css" media="screen" title="no title" charset="utf-8">
+</head>
+<body>
+<h1>PhoneGap Device API Documentation</h1>
+<div id="deck">
+    
+    <div class="card active">
+        <ul>
+            <li class="header">Core</li>
+            <li><a href="#events">Events</a></li>
+
+            <li class="header">Sensors</li>
+            <li>Geolocation</li>
+            <li>Accelerometer</li>
+            <li>Camera</li>
+            <li>Compass</li>
+            <li>Network</li>
+            <li>Notification</li>
+            
+            <li class="header">Data</li>
+            <li>Contacts</li>
+            <li>Device</li>
+            <li>File</li>
+            <li>Media</li>
+            <li>Storage</li>
+        </ul>
+    </div>
+
+    <div id="events" class="card active">
+        load, unload, deviceready, pause
+    </div>
+
+    <div id="geo" class="card">
+    </div>
+
+    <div id="accel" class="card">
+    </div>
+
+    <div id="camera" class="card">
+    </div>
+
+    <div id="compass" class="card">
+    </div>
+    
+    <div id="network" class="card">
+    </div>
+
+    <div id="notification" class="card">
+    </div>
+</div>
+<!-- always put phonegap.js first!!! -->
+<script src="phonegap-0.9.4.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/xui.js" type="text/javascript" charset="utf-8"></script>
+<!-- then put in your app logic -->
+<script src="js/app.js" type="text/javascript" charset="utf-8"></script>
+<!-- weinre -->
+<script type="text/javascript" charset="utf-8" src="http://localhost:8080/target/target-script-min.js"></script>
+</body>
+</html>
