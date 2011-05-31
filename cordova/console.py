@@ -28,7 +28,9 @@ class Console(object):
 
         sys.exit(0)
 
-if __name__ == '__main__':
+def main():
     console = Console()
     console.run()
 
+if __name__ == '__main__':
+    main()
