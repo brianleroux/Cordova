@@ -101,3 +101,21 @@ Generated MakeFile Commands
 	log ....... launches logger
 	release ... this is for you to implement!
 	emulate ... launch platform emulators
+
+Contributers
+---
+
+You will need to install a modern Python, PIP and pyvows. On OSX this is pretty easy:
+
+    easy_install pip
+    pip install pyvows
+
+You may run into an error installing lxml dependency. Set your arch by:
+
+    export ARCHFLAGS='-arch i386 -arch x86_64' 
+
+And then continue pip installing away... from there you should be able to run:
+
+    make
+
+And see the unit tests execute! 
