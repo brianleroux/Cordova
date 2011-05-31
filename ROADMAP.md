@@ -9,6 +9,7 @@
 - supress the insane amount of stdout noise in the common scripts
 - phonegap-webos
 - make android:screenOrientation = "portrait" by default. same for ios
+- dojo mobile recipe
 
 0.5.0
 
