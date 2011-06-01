@@ -1,56 +1,224 @@
-<!-- You can omit the HTML header and the body tag since it is defined
-in root.html. In fact, this is the way it works on webOS and its scenes. -->
-<div id="jqt">
-  <div id="home" class="current">
-    <div class="toolbar">
-      <h1>Hello World!</h1>
-      <a class="button" href="#second">Second Page</a>
-    </div>
-    
-    <h2>PhoneGap Template</h2>
-    
-    <div class="content">
-      <p>This template is a basic example of an PhoneGap App on webOS using
-      the jQTouch Framework. It can easily be modified, extended, and used
-      with another Framework (e.g. jQuery Mobile).</p>
-      
-      <a href="#" class="bigButton" id="takePicture">Camera.getPicture() example</a>
-      
-      <p>Because this is a Scene from webOS's point of view,
-      scolling actually works. To let you test this, this text has been
-      made extra long and boring. But nothing is to much to bring pleasure
-      to you, dear user.</p>
-      
-      <p>So, hopefully this example can help you to get started on your
-      mobile building quest! Have fun with this, and create many exciting
-      Apps to make this beautiful platform really shine!</p>
-    </div>
-  </div>
-  
-  <div id="second">
-    <div class="toolbar">
-      <a class="back">Back</a>
-      <h1>Second Page</h1>
-      <a class="button" href="#third">Third Page</a>
-    </div>
-    
-    <div class="content">
-      <h2>This is a second page</h2>
-      
-      <p>This page is here so you can test the back swipe functionality.</p>
-    </div>
-  </div>
-  
-  <div id="third">
-    <div class="toolbar">
-      <a class="back">Back</a>
-      <h1>Third Page</h1>
-    </div>
-    
-    <div class="content">
-      <h2>This is a third page</h2>
-      
-      <p>This page is here so you can test the back swipe functionality.</p>
-    </div>
-  </div>
+<!DOCTYPE html>
+
+<!--
+
+	This sample index.html is a "bare bones" example of using web development
+	to produce a webOS app using mini Mojo. This is *not* designed to illustrate
+	best practices (as the advanced developer will notice right off), but
+	rather to show that even basic "web 1.0" skills can successfully create an
+	app.
+
+-->
+
+
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>PhoneGap WebOS</title>
+<!--	
+	<link rel="stylesheet" href="jqtouch/jqtouch.css" />
+	<link rel="stylesheet" href="jqtouch/themes/default/theme.css" />
+	<link rel="stylesheet" href="css/main.css" />
+-->
+	
+	<script type="text/javascript" src="phonegap.js"></script>   
+	<script type="text/javascript">
+		// create global var for sqlite database instance
+		var db;
+	</script>
+	
+	
+	<link rel="stylesheet" type="text/css" href="css/menu.css">
+	
+</head>
+<body>
+
+<a onclick="dashboard();">Dashboard</a>
+
+<div id="menu">
+	<a onclick="page('screen');">Adjust Screen Settings</a>
+	<a onclick="info();">Show Device Info</a>
+	<a onclick="net();">Show Network Info</a>	
+	<a onclick="navigator.notification.showBanner('Banner test','banner');menu(false);">Show Banner Message</a>
+	<a onclick="window.debug.log('trace this');">Console Logging</a>
+	<a onclick="launchmap()">Launch Map App</a>
+	<a onclick="navigator.window.newCard('about:blank', '<html><body>Hello again!</body></html>');menu(false);">Launch New Card</a>
+	<a onclick="getPicture();">Launch Camera</a>
+	<a onclick="storage();">Storage Tests</a>
+	<a onclick="menu(false);">Done</a>
 </div>
+
+<div id="screen">
+	<p><input type="checkbox" onchange="navigator.window.setFullScreen(this.checked);">navigator.window.setFullScreen();</p>
+	<p><input type="checkbox" onchange="navigator.window.blockScreenTimeout(this.checked);">navigator.window.blockScreenTimeout();</p>
+	<p><input type="checkbox" onchange="navigator.accelerometer.setFastAccelerometer(this.checked);">navigator.accelerometer.fastAccelerometer();</p>
+	<p>navigator.orientation.setWindowOrientation();</p>
+	<input type="radio" onchange="navigator.orientation.setOrientation(this.value);" value="up" name="orientation" checked>up
+	<input type="radio" onchange="navigator.orientation.setOrientation(this.value);" value="down" name="orientation">down
+	<input type="radio" onchange="navigator.orientation.setOrientation(this.value);" value="left" name="orientation">left
+	<input type="radio" onchange="navigator.orientation.setOrientation(this.value);" value="right" name="orientation">right
+	<input type="radio" onchange="navigator.orientation.setOrientation(this.value);" value="free" name="orientation">free
+
+	
+	<p>navigator.orientation.getCurrentOrientation()</p>
+	<input type="button" onclick="displayCurrentOrientation();" value="Get Current Orientation">  
+	
+	<p>navigator.notification.alert();</p>
+	<input type="button" onclick="navigator.notification.alert('alert');" value="Show Alert">    
+	
+</div>
+
+<div id="info"></div>
+
+<div id="net"></div>
+
+<div id="camera"></div> 
+
+<div id="storage" style="display: none">
+	<p>storage tests</p>
+	<input type="button" onclick="createDB();" value="Test SQLite DB"> 
+	<div id="storageResults"></div>
+</div>
+
+<script>                         
+document.addEventListener('deviceready', function () {
+    // PhoneGap is ready, do all your stuf here
+}, false);
+
+function createDB() {  
+	document.getElementById('storageResults').innerHTML = '';
+	db = window.openDatabase("test", "1.0", "Test DB", false);
+	db.transaction(populateDB, errorCB, successCB);
+}
+
+function populateDB(tx) {
+	tx.executeSql('DROP TABLE IF EXISTS DEMO');
+	tx.executeSql('CREATE TABLE IF NOT EXISTS DEMO (id unique, data)');
+	tx.executeSql('INSERT INTO DEMO (id, data) VALUES (1, "First row")');
+	tx.executeSql('INSERT INTO DEMO (id, data) VALUES (2, "Second row")');
+}
+
+function errorCB(tx, err) {
+	navigator.notification.alert("error: " + err);
+}
+
+function successCB() {
+	navigator.notification.alert('successfully created & populated');  
+	db.transaction(queryDB, errorCB);
+}
+
+function queryDB(tx) {
+	tx.executeSql('SELECT * FROM DEMO', [], querySuccess, errorCB);
+}
+
+function querySuccess(tx, results) {     
+	var len = results.rows.length;
+	navigator.notification.alert('rows inserted: ' + len);
+	
+	if (len > 0) {
+		for (var i=0;i<len;i++) {
+			navigator.notification.alert('id: ' + results.rows.item(i).id + ' data: ' + results.rows.item(i).data);
+		}
+	}
+}
+
+function dashboard() {
+    navigator.notification.newDashboard("dashboard.html");
+}
+
+function info() {
+	var deviceinfo = JSON.stringify(navigator.device.getDeviceInfo()).replace(/,/g, ', ');
+	page('info');
+	lastpage.innerHTML = deviceinfo;
+}
+              
+function storage() {
+	page('storage');
+}
+
+function net() {
+	page('net');
+	var netpage = lastpage;
+	netpage.innerHTML = "Requesting network info...";
+	
+	function successful(response) {
+		
+		var states = {};
+		        states[NetworkStatus.NOT_REACHABLE]                      = 'No network connection';
+		        states[NetworkStatus.REACHABLE_VIA_CARRIER_DATA_NETWORK] = 'Carrier data connection';
+		        states[NetworkStatus.REACHABLE_VIA_WIFI_NETWORK]         = 'WiFi connection';
+		
+		
+		var r = JSON.stringify(states[response]);
+		netpage.innerHTML = r.replace(/,/g, ', ');
+	}
+	
+	var request = navigator.network.isReachable('palm://com.palm.connectionmanager', successful, {});
+}
+
+function displayCurrentOrientation() {
+	navigator.notification.showBanner(navigator.orientation.getCurrentOrientation(), 'current orientaiton'); 
+}	
+
+function getPicture() {
+	page('camera');
+	var cameraPage = lastpage;
+	lastpage.innerHTML = "camera application should launch if this works";
+	
+	function onSuccessCallback(response) {
+		console.log("camera launched successfully");
+		navigator.notification.showBanner("camera launched successfully");
+	}
+	
+	function onErrorCallback(response) {
+		console.log("camera failed to launch");
+		navigator.notification.showBanner("camera failed to launch");
+	}
+	
+	navigator.camera.getPicture(onSuccessCallback, onErrorCallback);
+}
+
+window.addEventListener("palmsystem", function(e) {
+	console.log("system message: " + JSON.stringify(e.data));
+});
+
+window.addEventListener("appmenuopen", function() {
+	menu(true);
+});
+
+window.addEventListener("back", function() {
+	console.log("back gesture");
+});
+
+window.addEventListener("forward", function() {
+	console.log("forward gesture");
+});
+
+function menu() {
+	var menudiv = document.getElementById('menu');
+	if (typeof state == 'undefined')
+		var state = (menudiv.style.display != 'block');
+		
+	menudiv.style.display = state ? 'block' : 'none';
+}
+
+lastreq = null;
+function launchmap() {
+	navigator.map.show();
+	menu(false);
+}
+
+var lastpage = document.getElementById('screen');
+
+function page(id) {
+	lastpage.style.display = 'none';
+	lastpage = document.getElementById(id);
+	lastpage.style.display = 'block';
+	menu(false);
+}
+	
+</script>
+
+
+</body>
+</html>

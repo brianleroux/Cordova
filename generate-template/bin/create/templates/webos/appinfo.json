@@ -1,9 +1,9 @@
 {
-	"id": "com.phonegap.example",
-	"version": "1.0.0",
-	"vendor": "Nitobi",
+	"id": "com.phonegap.webos",
+	"version": "0.0.1",
+	"vendor": "HP",
 	"type": "web",
-	"main": "root.html",
-	"title": "PhoneGap Example",
-	"icon": "img/icon.png"
+	"main": "index.html",
+	"title": "PhoneGap WebOS",
+	"uiRevision": 2
 }
