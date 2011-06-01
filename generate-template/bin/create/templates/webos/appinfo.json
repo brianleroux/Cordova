@@ -1,6 +1,6 @@
 {
-	"id": "com.phonegap.webos",
-	"version": "0.0.1",
+	"id": "com.phonegap.example",
+	"version": "0.1.0",
 	"vendor": "HP",
 	"type": "web",
 	"main": "index.html",
