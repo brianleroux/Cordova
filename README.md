@@ -14,7 +14,8 @@ Currently Supported Platforms
 
 - iOS
 - Android
-- Blackberry (experimental)
+- webOS
+- Blackberry 
 
 Justification
 ---
