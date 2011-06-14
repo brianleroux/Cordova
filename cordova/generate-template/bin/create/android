@@ -8,17 +8,15 @@ FULL="./tmp/android/src/"$PTH"/"$ACT".java"
 # clobber existing build sludge
 rm -rf ./tmp/android
 
-if [ `uname -o` = "Cygwin"]; then
-    # Cygwin specific stuff
-    ANDROID="android.bat"
-    SEDARG=""
-elif [ `uname -o` = "GNU/Linux" ]; then
-    ANDROID="android"
-    SEDARG=""
-else 
-    # Other UNIX (Linux, etc.) specific stuff
-    ANDROID="android"
-    SEDARG="''"
+if [ `uname -o` = "Cygwin" ]
+then
+	# Cygwin specific stuff
+	ANDROID="android.bat"
+	SEDARG=""
+else
+	# Other UNIX (Linux, etc.) specific stuff
+	ANDROID="android"
+	SEDARG="''"
 fi
 
 # get the android target
