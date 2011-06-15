@@ -36,19 +36,21 @@ Installation
 ---
 
 1. Make sure you have an Android AVD named `default`.
-2. Add the following line to `~/.bashrc` or `~/.bash_profile`:
-	
+2. Clone the repository.
+3. From the root of the Cordova folder, run:
+        python setup.py install
+4. Add the following line to `~/.bashrc` or `~/.bash_profile`:
 	export PATH="$PATH:/path/to/cordova"
-3. Install the Blackberry WebWorks SDK on the Windows (virtual) machine on which you intend to run the simulator.
-4. Create a shared folder accessible by the Windows (virtual) machine pointing to /path/to/cordova 
+5. Install the Blackberry WebWorks SDK on the Windows (virtual) machine on which you intend to run the simulator.
+6. Create a shared folder accessible by the Windows (virtual) machine pointing to /path/to/cordova 
 
 Usage
 ---
 
 Generate a new PhoneGap project by running:
 	
-	phonegap PROJECTNAME --www [www recipe] --test [test recipe]
-    ex., phonegap MyProject --www vanilla
+	phonegap create PROJECTNAME --www [www recipe] --test [test recipe]
+    ex., phonegap create MyProject --www vanilla
 
 For further usage info try:
 
