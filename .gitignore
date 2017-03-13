@@ -1,7 +1,1 @@
-cache
-DS_Store
-./generate-template/tmp/**/*
-*.swp
-*.pyc
-cordova.egg-info
-dist
+*
